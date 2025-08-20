@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManiX Wallpaper Preview</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        .preview-container {
+            margin-top: 20px;
+        }
+        .wallpaper-preview {
+            width: 100%;
+            height: 500px;
+            background-size: cover;
+            background-position: center;
+            margin-bottom: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+        }
+        .tab-buttons {
+            margin-bottom: 15px;
+        }
+        .tab-button {
+            padding: 8px 16px;
+            background-color: #f1f1f1;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 10px;
+        }
+        .tab-button.active {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        input[type="text"], input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .json-output {
+            background-color: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            white-space: pre-wrap;
+            font-family: monospace;
+        }
+        .info-box {
+            background-color: #e7f3fe;
+            border-left: 6px solid #2196F3;
+            padding: 10px;
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ManiX Wallpaper Preview</h1>
+    <p>Use this tool to preview wallpapers and generate JSON entries for your wallpapers.json file.</p>
+    
+    <div class="tab-buttons">
+        <button id="externalUrlTab" class="tab-button active">External URL</button>
+        <button id="localUploadTab" class="tab-button">Local Upload</button>
+    </div>
+    
+    <div id="externalUrlContent" class="tab-content active controls">
+        <h2>External URL Wallpaper</h2>
+        <div class="info-box">
+            <p>For external URLs (like Unsplash, Imgur, etc.), you need to provide both the main wallpaper URL and a thumbnail URL.</p>
+        </div>
+        <input type="text" id="wallpaperUrl" placeholder="Enter wallpaper URL" value="https://images.unsplash.com/photo-1536152470836-b943b246224c?auto=format&fit=crop&w=1920&q=80">
+        <input type="text" id="thumbnailUrl" placeholder="Enter thumbnail URL" value="https://images.unsplash.com/photo-1536152470836-b943b246224c?auto=format&fit=crop&w=300&q=80">
+        <input type="text" id="altText" placeholder="Enter alt text" value="Ocean waves">
+        <button onclick="previewExternalWallpaper()">Preview</button>
+    </div>
+    
+    <div id="localUploadContent" class="tab-content controls">
+        <h2>Local Upload Wallpaper</h2>
+        <div class="info-box">
+            <p><strong>For GitHub-hosted images:</strong></p>
+            <p>1. Upload your image to the <code>images</code> folder in this repository</p>
+            <p>2. For the thumbnail, either:</p>
+            <ul>
+                <li>Upload a smaller version of the image with <code>-thumbnail</code> suffix (e.g., <code>ocean-thumbnail.jpg</code>)</li>
+                <li>Or use the same image URL for both main image and thumbnail</li>
+            </ul>
+            <p>3. The raw GitHub URL format will be:</p>
+            <code>https://raw.githubusercontent.com/YOUR_USERNAME/ManiX_Wallpapers_pack/main/images/your-image.jpg</code>
+        </div>
+        <input type="text" id="repoUsername" placeholder="Your GitHub username" value="">
+        <input type="text" id="imageName" placeholder="Image filename (e.g., ocean.jpg)" value="">
+        <input type="text" id="localAltText" placeholder="Enter alt text" value="">
+        <div>
+            <label><input type="checkbox" id="createThumbnail" checked> Generate separate thumbnail entry</label>
+        </div>
+        <button onclick="previewLocalWallpaper()">Preview</button>
+    </div>
+    
+    <div class="preview-container">
+        <div id="wallpaperPreview" class="wallpaper-preview"></div>
+    </div>
+    
+    <h2>Generated JSON</h2>
+    <div id="jsonOutput" class="json-output"></div>
+    
+    <script>
+        // Tab switching functionality
+        document.getElementById('externalUrlTab').addEventListener('click', function() {
+            document.getElementById('externalUrlTab').classList.add('active');
+            document.getElementById('localUploadTab').classList.remove('active');
+            document.getElementById('externalUrlContent').classList.add('active');
+            document.getElementById('localUploadContent').classList.remove('active');
+        });
+        
+        document.getElementById('localUploadTab').addEventListener('click', function() {
+            document.getElementById('localUploadTab').classList.add('active');
+            document.getElementById('externalUrlTab').classList.remove('active');
+            document.getElementById('localUploadContent').classList.add('active');
+            document.getElementById('externalUrlContent').classList.remove('active');
+        });
+        
+        // Preview external URL wallpaper
+        function previewExternalWallpaper() {
+            const wallpaperUrl = document.getElementById('wallpaperUrl').value;
+            const thumbnailUrl = document.getElementById('thumbnailUrl').value;
+            const altText = document.getElementById('altText').value;
+            
+            // Update the preview
+            const previewElement = document.getElementById('wallpaperPreview');
+            previewElement.style.backgroundImage = `url(${wallpaperUrl})`;
+            
+            // Generate JSON
+            const wallpaperJson = {
+                url: wallpaperUrl,
+                thumbnail: thumbnailUrl,
+                alt: altText
+            };
+            
+            // Display the JSON
+            document.getElementById('jsonOutput').textContent = JSON.stringify(wallpaperJson, null, 4);
+        }
+        
+        // Preview local upload wallpaper
+        function previewLocalWallpaper() {
+            const username = document.getElementById('repoUsername').value;
+            const imageName = document.getElementById('imageName').value;
+            const altText = document.getElementById('localAltText').value;
+            const createThumbnail = document.getElementById('createThumbnail').checked;
+            
+            if (!username || !imageName) {
+                alert('Please enter your GitHub username and image filename');
+                return;
+            }
+            
+            // Generate URLs
+            const baseUrl = `https://raw.githubusercontent.com/${username}/ManiX_Wallpapers_pack/main/images/`;
+            const wallpaperUrl = baseUrl + imageName;
+            
+            // Generate thumbnail URL
+            let thumbnailUrl;
+            if (createThumbnail) {
+                // Create thumbnail filename by inserting -thumbnail before extension
+                const lastDotIndex = imageName.lastIndexOf('.');
+                if (lastDotIndex !== -1) {
+                    const name = imageName.substring(0, lastDotIndex);
+                    const ext = imageName.substring(lastDotIndex);
+                    thumbnailUrl = baseUrl + name + '-thumbnail' + ext;
+                } else {
+                    thumbnailUrl = baseUrl + imageName + '-thumbnail';
+                }
+            } else {
+                // Use the same URL for thumbnail
+                thumbnailUrl = wallpaperUrl;
+            }
+            
+            // Update the preview (note: this won't actually show the image unless it's already uploaded to GitHub)
+            const previewElement = document.getElementById('wallpaperPreview');
+            previewElement.style.backgroundImage = `url(${wallpaperUrl})`;
+            previewElement.innerHTML = '<div style="padding:20px;background:rgba(0,0,0,0.5);color:white;">' + 
+                                      'Preview not available until image is uploaded to GitHub.<br>' +
+                                      'This is how your JSON will look:</div>';
+            
+            // Generate JSON
+            const wallpaperJson = {
+                url: wallpaperUrl,
+                thumbnail: thumbnailUrl,
+                alt: altText || 'Wallpaper image'
+            };
+            
+            // Display the JSON
+            document.getElementById('jsonOutput').textContent = JSON.stringify(wallpaperJson, null, 4);
+        }
+        
+        // Initialize with default values
+        window.onload = function() {
+            previewExternalWallpaper();
+        };
+    </script>
+</body>
+</html>

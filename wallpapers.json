@@ -1,0 +1,32 @@
+{
+    "wallpapers": [
+        {
+            "url": "https://images.unsplash.com/photo-1536152470836-b943b246224c?auto=format&fit=crop&w=1920&q=80",
+            "thumbnail": "https://images.unsplash.com/photo-1536152470836-b943b246224c?auto=format&fit=crop&w=300&q=80",
+            "alt": "Ocean waves",
+            "default": true
+        },
+        {
+            "url": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=1920&q=80",
+            "thumbnail": "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?auto=format&fit=crop&w=300&q=80",
+            "alt": "Nature Landscape"
+        },
+        {
+            "url": "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=1920&q=80",
+            "thumbnail": "https://images.unsplash.com/photo-1497436072909-60f360e1d4b1?auto=format&fit=crop&w=300&q=80",
+            "alt": "Mountain View"
+        }
+    ],
+    "liveWallpapers": [
+        {
+            "url": "https://www.w3schools.com/html/mov_bbb.mp4",
+            "thumbnail": "https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217",
+            "alt": "Big Buck Bunny Timelapse"
+        },
+        {
+            "url": "https://player.vimeo.com/external/209749463.sd.mp4?s=2e2b2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e&profile_id=164&oauth2_token_id=57447761",
+            "thumbnail": "https://images.pexels.com/videos/857195/free-video-857195.jpg?auto=compress&w=300",
+            "alt": "Clouds Timelapse"
+        }
+    ]
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManiX Wallpapers Pack</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #333;
+        }
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #2980b9;
+        }
+        pre {
+            background-color: #f8f8f8;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+        }
+        code {
+            font-family: Consolas, Monaco, 'Andale Mono', monospace;
+        }
+        .container {
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+        }
+        .button {
+            display: inline-block;
+            background-color: #3498db;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            margin-top: 10px;
+        }
+        .button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ManiX Wallpapers Pack</h1>
+        
+        <p>This repository contains wallpapers for the ManiX Chrome extension. By hosting this repository on GitHub, you can update the wallpapers without having to update the extension itself.</p>
+        
+        <h2>Wallpapers JSON</h2>
+        <p>The main file in this repository is <code>wallpapers.json</code>, which contains the configuration for all wallpapers available in the ManiX extension.</p>
+        
+        <pre><code>{
+    "wallpapers": [
+        {
+            "url": "https://example.com/image.jpg",
+            "thumbnail": "https://example.com/image-thumbnail.jpg",
+            "alt": "Description of the image",
+            "default": true
+        },
+        // More wallpapers...
+    ],
+    "liveWallpapers": [
+        {
+            "url": "https://example.com/video.mp4",
+            "thumbnail": "https://example.com/video-thumbnail.jpg",
+            "alt": "Description of the video"
+        },
+        // More live wallpapers...
+    ]
+}</code></pre>
+        
+        <h2>Resources</h2>
+        <ul>
+            <li><a href="wallpapers.json">View wallpapers.json</a></li>
+            <li><a href="preview.html" class="button">Wallpaper Preview Tool</a></li>
+            <li><a href="https://github.com/YOUR_USERNAME/ManiX_Wallpapers_pack">GitHub Repository</a></li>
+        </ul>
+        
+        <h2>How to Use</h2>
+        <p>To use this wallpaper pack with your ManiX extension:</p>
+        <ol>
+            <li>Host this repository on GitHub</li>
+            <li>Enable GitHub Pages for this repository</li>
+            <li>Update the <code>fetchWallpapersFromGitHub</code> function in your extension's <code>main.js</code> file with the URL to your <code>wallpapers.json</code> file</li>
+        </ol>
+        
+        <pre><code>async fetchWallpapersFromGitHub() {
+    try {
+        const githubUrl = 'https://raw.githubusercontent.com/YOUR_USERNAME/ManiX_Wallpapers_pack/main/wallpapers.json';
+        // Rest of the function...
+    }
+}</code></pre>
+    </div>
+</body>
+</html>
