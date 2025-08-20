@@ -18,15 +18,25 @@
         }
     ],
     "liveWallpapers": [
-        {
-            "url": "https://www.w3schools.com/html/mov_bbb.mp4",
-            "thumbnail": "https://peach.blender.org/wp-content/uploads/title_anouncement.jpg?x11217",
-            "alt": "Big Buck Bunny Timelapse"
-        },
-        {
-            "url": "https://player.vimeo.com/external/209749463.sd.mp4?s=2e2b2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e2e&profile_id=164&oauth2_token_id=57447761",
-            "thumbnail": "https://images.pexels.com/videos/857195/free-video-857195.jpg?auto=compress&w=300",
-            "alt": "Clouds Timelapse"
-        }
-    ]
+    {
+        "url": "videos/1.mp4",
+        "thumbnail": "videos/1.mp4",
+        "alt": "Wallpaper 1"
+    },
+    {
+        "url": "videos/2.mp4",
+        "thumbnail": "videos/2.mp4",
+        "alt": "Wallpaper 2"
+    },
+    {
+        "url": "videos/3.mp4",
+        "thumbnail": "videos/3.mp4",
+        "alt": "Wallpaper 3"
+    },
+    {
+        "url": "videos/4.mp4",
+        "thumbnail": "videos/4.mp4",
+        "alt": "Wallpaper 4"
+    }
+]
 }
