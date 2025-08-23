@@ -1,105 +1,682 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ManiX Wallpapers Pack</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 20px;
-            color: #333;
-        }
-        h1 {
-            color: #2c3e50;
-            border-bottom: 2px solid #3498db;
-            padding-bottom: 10px;
-        }
-        h2 {
-            color: #2980b9;
-        }
-        pre {
-            background-color: #f8f8f8;
-            padding: 15px;
-            border-radius: 5px;
-            overflow-x: auto;
-        }
-        code {
-            font-family: Consolas, Monaco, 'Andale Mono', monospace;
-        }
-        .container {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
-            padding: 20px;
-        }
-        .button {
-            display: inline-block;
-            background-color: #3498db;
-            color: white;
-            padding: 10px 20px;
-            text-decoration: none;
-            border-radius: 5px;
-            margin-top: 10px;
-        }
-        .button:hover {
-            background-color: #2980b9;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <title>Manix – Smart Chrome New Tab Extension</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Manix is your all-in-one new tab extension for Chrome. Clean, fast, customizable, and privacy focused." />
+  <style>
+    :root {
+      --main: #6c63ff;
+      --bg: #f9faff;
+      --dark: #21223d;
+      --light: #fff;
+      --accent: #00c9aa;
+      --gray-light: #f5f5f5;
+      --header-bg: #152238; /* deep navy blue */
+      --footer-bg: #f7f8fa;
+      --footer-text: #67798e;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--dark);
+      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      transition: background 0.3s;
+    }
+
+    /* Full-width Minimal Professional Header */
+    header {
+      background: var(--header-bg);
+      color: var(--light);
+      text-align: center;
+      padding: 0.8em 1.5em;
+      font-weight: 600;
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 100vw;
+      box-sizing: border-box;
+      font-size: 1rem;
+      letter-spacing: 0.04em;
+    }
+    html, body {
+  overflow-x: hidden;
+  max-width: 100vw;
+}
+    header h1 {
+      margin: 0;
+      font-size: 1.4rem;
+      letter-spacing: 2px;
+      cursor: default;
+      user-select: none;
+      font-weight: 700;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    nav {
+      display: flex;
+      gap: 1.2em;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      flex-grow: 1;
+      max-width: 720px;
+      margin-left: 2em;
+    }
+    nav a {
+      color: var(--light);
+      text-decoration: none;
+      font-weight: 500;
+      transition: color 0.25s ease, background-color 0.25s ease;
+      padding: 0.25em 0.5em;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    nav a:last-child {
+      background: var(--accent);
+      color: var(--dark);
+      font-weight: 700;
+      padding: 0.4em 1em;
+      border-radius: 20px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:last-child:hover,
+    nav a:last-child:focus {
+      background: #33e3bf;
+      color: var(--dark);
+      outline: none;
+    }
+    nav a:hover,
+    nav a:focus {
+      color: #a9caff;
+      outline: none;
+    }
+
+    .intro {
+      padding: 2.1em 1em 2em 1em;
+      text-align: center;
+      margin-top: 1em;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .intro img {
+      max-width: 148px;
+      margin: 0 auto 1em auto;
+      animation: floating 2s infinite alternate;
+    }
+    @keyframes floating {
+      from {
+        transform: translateY(0);
+      }
+      to {
+        transform: translateY(-10px);
+      }
+    }
+    .intro h2 {
+      font-size: 2em;
+      margin: 0.6em 0;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .intro p {
+      font-weight: 500;
+      line-height: 1.4;
+      color: var(--dark);
+    }
+
+    .trust {
+      text-align: center;
+      padding: 1.2em 0.7em 0.2em 0.7em;
+      color: #606089;
+      font-size: 1.08em;
+      background: var(--gray-light);
+      max-width: 800px;
+      margin: 1.5em auto;
+      border-radius: 10px;
+      user-select: none;
+    }
+    .trust img {
+      width: 32px;
+      margin: 0 4px;
+      vertical-align: middle;
+      opacity: 0.6;
+      user-select: none;
+    }
+
+    .features {
+      max-width: 950px;
+      margin: 2em auto 1.3em auto;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      grid-gap: 1.6em;
+      padding: 0 1em;
+    }
+    .feature-card {
+      background: var(--light);
+      border-radius: 17px;
+      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.07);
+      padding: 1.35em 1em;
+      text-align: center;
+      transition: transform 0.28s;
+      cursor: pointer;
+      border: 1px solid #f0f3ff;
+      font-weight: 500;
+    }
+    .feature-card:hover {
+      transform: translateY(-7px) scale(1.04);
+      box-shadow: 0 8px 24px #6c63ff34;
+    }
+    .feature-card h3 {
+      color: var(--main);
+      margin-top: 0;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    .cta {
+      background: var(--main);
+      color: var(--light);
+      text-align: center;
+      padding: 2em 1em 3em 1em;
+      border-radius: 9px;
+      margin: 2em 1em;
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+      font-weight: 600;
+      letter-spacing: 0.03em;
+    }
+    .cta button {
+      font-size: 1.15em;
+      background: var(--accent);
+      color: var(--dark);
+      border: none;
+      border-radius: 100px;
+      padding: 0.75em 1.8em;
+      margin-top: 1em;
+      font-weight: 700;
+      box-shadow: 0 2px 8px #00c9aa22;
+      cursor: pointer;
+      transition: background 0.22s;
+      letter-spacing: 0.02em;
+    }
+    .cta button:hover {
+      background: #18ffe1;
+      color: #21223d;
+    }
+
+    .why-manix {
+      max-width: 1000px;
+      margin: 3em auto;
+      padding: 0 1em;
+    }
+    .why-manix h2 {
+      text-align: center;
+      color: #6c63ff;
+      margin-bottom: 2em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .why-row {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      margin-bottom: 3em;
+    }
+    .why-row:nth-child(even) {
+      flex-direction: row-reverse;
+    }
+    .why-row img {
+      width: 88%;
+      max-width: 350px;
+      border-radius: 22px;
+      box-shadow: 0 1px 12px #6c63ff25;
+      margin: 0 auto;
+      display: block;
+    }
+    .why-row > div {
+      flex: 1;
+      min-width: 220px;
+    }
+    .why-row > div:first-child {
+      text-align: center;
+    }
+    .why-row h3 {
+      color: #6c63ff;
+      font-weight: 700;
+    }
+    .why-row p {
+      font-weight: 500;
+      line-height: 1.3em;
+      color: var(--dark);
+    }
+
+    .testimonials-section {
+      max-width: 900px;
+      margin: 2em auto;
+      padding: 0 1em;
+    }
+    .testimonials-section h2 {
+      text-align: center;
+      color: var(--main);
+      margin-bottom: 1.2em;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+    .testimonials-slider {
+      position: relative;
+      background: var(--light);
+      border-radius: 18px;
+      box-shadow: 0 0px 12px #6c63ff12;
+      padding: 2em 1em 1.5em 1em;
+      text-align: center;
+      min-height: 170px;
+      font-weight: 500;
+    }
+    .testimonial {
+      opacity: 0;
+      transition: opacity 0.5s;
+      position: absolute;
+      width: 90%;
+      left: 5%;
+      top: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    .testimonial.show {
+      opacity: 1;
+      position: relative;
+    }
+    .testimonial-avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 100px;
+      margin: 0 0 0.5em 0;
+      border: 2px solid var(--accent);
+      box-shadow: 0 1px 8px #6c63ff17;
+      object-fit: cover;
+      background: var(--gray-light);
+    }
+    .testimonial-name {
+      font-weight: 700;
+      color: var(--main);
+    }
+    .testimonial-role {
+      font-size: 0.95em;
+      color: #888;
+    }
+    .testimonial-quote {
+      font-style: italic;
+      color: #555;
+      margin-bottom: 0.8em;
+      max-width: 620px;
+      line-height: 1.3;
+    }
+    .testimonial-nav {
+      display: flex;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 1em;
+    }
+    .testimonial-dot {
+      width: 11px;
+      height: 11px;
+      border-radius: 100px;
+      background: var(--accent);
+      opacity: 0.35;
+      cursor: pointer;
+      transition: opacity 0.2s;
+      border: none;
+    }
+    .testimonial-dot.active {
+      opacity: 0.92;
+    }
+
+    .faq-section,
+    .contact-section {
+      max-width: 860px;
+      margin: 2em auto;
+      padding: 0 1em;
+      font-weight: 500;
+    }
+    .faq-section h2,
+    .contact-section h2 {
+      color: var(--main);
+      text-align: center;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+    }
+    .faq-item {
+      margin: 1em 0;
+      background: #fafafa;
+      border-radius: 9px;
+      box-shadow: 0 1px 6px #6c63ff12;
+      padding: 1em 1.1em;
+      line-height: 1.3em;
+    }
+    .contact-section form input,
+    .contact-section form textarea {
+      width: 90%;
+      padding: 0.7em;
+      margin-bottom: 0.57em;
+      font-size: 1em;
+      border-radius: 8px;
+      border: 1px solid #ddd;
+      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .contact-section form textarea {
+      height: 4.1em;
+      resize: vertical;
+    }
+    .contact-section form button {
+      background: var(--main);
+      color: #fff;
+      border: none;
+      padding: 0.7em 1.4em;
+      border-radius: 100px;
+      margin-top: 0.8em;
+      cursor: pointer;
+      font-size: 1.08em;
+      font-weight: 700;
+      letter-spacing: 0.03em;
+      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    }
+    .contact-section form button:hover {
+      background: var(--accent);
+      color: var(--dark);
+    }
+
+    /* Minimal Footer with full width */
+    footer {
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      text-align: center;
+      font-size: 0.85em;
+      padding: 1.5em 1em;
+      margin-top: 2em;
+      border-top: 1px solid #d6dce9;
+      width: 100vw;
+      box-sizing: border-box;
+      user-select: none;
+      font-weight: 400;
+      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    }
+    footer a {
+      color: var(--main);
+      text-decoration: none;
+      font-weight: 600;
+      transition: color 0.25s;
+    }
+    footer a:hover,
+    footer a:focus {
+      color: var(--accent);
+      outline: none;
+    }
+
+    /* Responsive */
+    @media (max-width: 950px) {
+      .why-row {
+        flex-direction: column !important;
+      }
+      .why-row > div {
+        padding: unset !important;
+      }
+      .why-row img {
+        max-width: 290px;
+      }
+    }
+    @media (max-width: 700px) {
+      .features {
+        grid-template-columns: 1fr;
+      }
+      .intro img {
+        max-width: 80px;
+      }
+      header h1 {
+        font-size: 1.2rem;
+      }
+      nav {
+        gap: 0.8em;
+      }
+      nav a {
+        font-size: 0.85rem;
+        padding: 0.2em 0.35em;
+      }
+      .testimonials-slider {
+        padding: 1.4em 0.6em;
+      }
+      .why-row img {
+        max-width: 200px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <h1>ManiX Wallpapers Pack</h1>
-        
-        <p>This repository contains wallpapers for the ManiX Chrome extension. By hosting this repository on GitHub, you can update the wallpapers without having to update the extension itself.</p>
-        
-        <h2>Wallpapers JSON</h2>
-        <p>The main file in this repository is <code>wallpapers.json</code>, which contains the configuration for all wallpapers available in the ManiX extension.</p>
-        
-        <pre><code>{
-    "wallpapers": [
-        {
-            "url": "https://example.com/image.jpg",
-            "thumbnail": "https://example.com/image-thumbnail.jpg",
-            "alt": "Description of the image",
-            "default": true
-        },
-        // More wallpapers...
-    ],
-    "liveWallpapers": [
-        {
-            "url": "https://example.com/video.mp4",
-            "thumbnail": "https://example.com/video-thumbnail.jpg",
-            "alt": "Description of the video"
-        },
-        // More live wallpapers...
-    ]
-}</code></pre>
-        
-        <h2>Resources</h2>
-        <ul>
-            <li><a href="wallpapers.json">View wallpapers.json</a></li>
-            <li><a href="preview.html" class="button">Wallpaper Preview Tool</a></li>
-            <li><a href="https://github.com/YOUR_USERNAME/ManiX_Wallpapers_pack">GitHub Repository</a></li>
-        </ul>
-        
-        <h2>How to Use</h2>
-        <p>To use this wallpaper pack with your ManiX extension:</p>
-        <ol>
-            <li>Host this repository on GitHub</li>
-            <li>Enable GitHub Pages for this repository</li>
-            <li>Update the <code>fetchWallpapersFromGitHub</code> function in your extension's <code>main.js</code> file with the URL to your <code>wallpapers.json</code> file</li>
-        </ol>
-        
-        <pre><code>async fetchWallpapersFromGitHub() {
-    try {
-        const githubUrl = 'https://raw.githubusercontent.com/YOUR_USERNAME/ManiX_Wallpapers_pack/main/wallpapers.json';
-        // Rest of the function...
-    }
-}</code></pre>
+  <header>
+    <h1>Manix</h1>
+    <nav>
+      <a href="#features">Features</a>
+      <a href="#why">Why Manix?</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener">Install</a>
+    </nav>
+  </header>
+
+  <div class="intro">
+    <img src="https://www.svgrepo.com/show/353622/chrome.svg" alt="Chrome Extension Logo" />
+    <h2>Upgrade Every New Tab—Make Chrome Work for You.</h2>
+    <p>
+      Manix instantly turns your Chrome new tab into a beautiful, customizable dashboard.
+      <br />
+      <b>Fast search • Smart tools • Shortcuts • Beautiful design • No data collection</b>
+    </p>
+  </div>
+
+  <div class="trust">
+    Trusted by users on
+    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Chrome_web_store_icon_2019.png" alt="Chrome Web Store" title="Chrome Web Store" />
+    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Reddit" title="Reddit" />
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732228.png" alt="Softonic" title="Softonic" />
+    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Google News" title="Google News" />
+  </div>
+
+  <section class="features" id="features">
+    <div class="feature-card">
+      <h3>Custom Shortcuts</h3>
+      <p>Quickly access your favorite websites and Google Apps with easy-to-set shortcuts. No more searching or typing!</p>
     </div>
+    <div class="feature-card">
+      <h3>Smart Search & Voice</h3>
+      <p>Find anything instantly with intelligent search and voice commands. Open new tabs with a whisper or a click.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Dynamic Clock & Date</h3>
+      <p>Stay organized with a real-time clock and date always visible on your new tab page.</p>
+    </div>
+    <div class="feature-card">
+      <h3>To-Do & Bookmarks</h3>
+      <p>Organize your tasks and manage bookmarks effortlessly—all from your Manix dashboard.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Privacy Focused</h3>
+      <p>Your data stays private. Manix does not collect or transmit any personal information.</p>
+    </div>
+    <div class="feature-card">
+      <h3>Stunning Wallpapers</h3>
+      <p>Pick from a curated gallery of beautiful backgrounds—freshen up every tab in style.</p>
+    </div>
+  </section>
+
+  <div class="cta">
+    <h2>Ready to supercharge Chrome?</h2>
+    <p>Get Manix from the Chrome Web Store! Join users who love efficient, beautiful browsing.</p>
+    <button onclick="window.open('https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd','_blank')">Add to Chrome</button>
+  </div>
+
+  <section class="why-manix" id="why">
+    <h2>Why Choose Manix?</h2>
+    <div class="why-row">
+      <div>
+        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=320&q=80" alt="Productivity" />
+      </div>
+      <div style="padding-left: 3vw;">
+        <h3>Boost Your Productivity</h3>
+        <p>
+          Manix helps you focus with a clean dashboard, custom shortcuts, quick search, and distraction-free design. Get more done every day.
+        </p>
+      </div>
+    </div>
+    <div class="why-row">
+      <div>
+        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=320&q=80" alt="Customization" />
+      </div>
+      <div style="padding-right: 3vw;">
+        <h3>Customize Your Experience</h3>
+        <p>Choose gorgeous wallpapers and tailor your tab layout. Enjoy a workspace that truly reflects your style and needs.</p>
+      </div>
+    </div>
+    <div class="why-row">
+      <div>
+        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=320&q=80" alt="Privacy" />
+      </div>
+      <div style="padding-left: 3vw;">
+        <h3>Privacy First</h3>
+        <p>Your data is never tracked. Manix puts privacy at the core, so you can browse safely and confidently.</p>
+      </div>
+    </div>
+    <div class="why-row">
+      <div>
+        <img src="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=320&q=80" alt="Simplicity" />
+      </div>
+      <div style="padding-right: 3vw;">
+        <h3>Quick & Simple Setup</h3>
+        <p>Install Manix in seconds and start using your new tab right away. All features are intuitive and easy to configure.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="testimonials-section" id="testimonials">
+    <h2>What Users Say About Manix</h2>
+    <div class="testimonials-slider">
+      <div class="testimonial show">
+        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="User1" class="testimonial-avatar" />
+        <div class="testimonial-quote">“Manix has totally upgraded my browser routine. It’s clean, fast, and feels personal. Love the shortcuts and voice search!”</div>
+        <div class="testimonial-name">Rahul S.</div>
+        <div class="testimonial-role">UI Designer</div>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User2" class="testimonial-avatar" />
+        <div class="testimonial-quote">“I really appreciate the privacy focus—no tracking and no ads. It’s the perfect productivity hub for Chrome!”</div>
+        <div class="testimonial-name">Arpita J.</div>
+        <div class="testimonial-role">Product Manager</div>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/men/53.jpg" alt="User3" class="testimonial-avatar" />
+        <div class="testimonial-quote">“The wallpaper gallery is stunning, and the to-do feature keeps me on task. Manix makes Chrome feel new again.”</div>
+        <div class="testimonial-name">Jayant T.</div>
+        <div class="testimonial-role">Graduate Student</div>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/women/41.jpg" alt="User4" class="testimonial-avatar" />
+        <div class="testimonial-quote">“Manix lets me customize everything. My most-used bookmarks are a click away. Setup was super simple.”</div>
+        <div class="testimonial-name">Divya K.</div>
+        <div class="testimonial-role">Freelance Writer</div>
+      </div>
+      <div class="testimonial">
+        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="User5" class="testimonial-avatar" />
+        <div class="testimonial-quote">“Finally a tab extension that isn’t bloated. Fast, lightweight, and just works. Highly recommended!”</div>
+        <div class="testimonial-name">Ashwin M.</div>
+        <div class="testimonial-role">Engineer</div>
+      </div>
+      <div class="testimonial-nav"></div>
+    </div>
+    <script>
+      // Simple testimonials slider (no external JS needed)
+      const testimonials = document.querySelectorAll('.testimonial');
+      const nav = document.querySelector('.testimonial-nav');
+      let currentTestimonial = 0;
+      testimonials.forEach((_, i) => {
+        const dot = document.createElement('button');
+        dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
+        dot.onclick = () => showTestimonial(i);
+        nav.appendChild(dot);
+      });
+      function showTestimonial(i) {
+        testimonials[currentTestimonial].classList.remove('show');
+        nav.children[currentTestimonial].classList.remove('active');
+        testimonials[i].classList.add('show');
+        nav.children[i].classList.add('active');
+        currentTestimonial = i;
+      }
+      // Auto-advance every 7s
+      setInterval(() => {
+        let next = (currentTestimonial + 1) % testimonials.length;
+        showTestimonial(next);
+      }, 7000);
+    </script>
+  </section>
+
+  <section class="faq-section" id="faq">
+    <h2>Frequently Asked Questions</h2>
+    <div class="faq-item">
+      <b>Is Manix free?</b><br />
+      Yes, fully free for everyone.
+    </div>
+    <div class="faq-item">
+      <b>Does Manix collect my data?</b><br />
+      No, your privacy is our priority—Manix does not collect or sell any user data.
+      <br />
+    </div>
+    <div class="faq-item">
+      <b>How do I customize shortcuts?</b><br />
+      Just click the settings icon on your new tab page to add or edit links.
+    </div>
+    <div class="faq-item">
+      <b>Who is Manix for?</b><br />
+      Anyone who wants efficient, beautiful, and distraction-free browsing.
+    </div>
+  </section>
+
+  <section class="contact-section" id="contact">
+    <h2>Contact & Feedback</h2>
+    <div style="text-align: center">
+      <p>
+        Made by <b>Manish Sharma</b>
+        <br />
+        <a href="mailto:contact@manishsharma18.in"
+          style="color: var(--main); font-weight: 700; text-decoration: underline"
+          >contact@manishsharma18.in</a
+        >
+      </p>
+      <form
+        onsubmit="alert('Thanks for your feedback!');return false;"
+        style="max-width: 450px; margin: 1em auto"
+      >
+        <input type="text" required placeholder="Your Email" />
+        <textarea required placeholder="Feedback or message..."></textarea>
+        <br />
+        <button>Send</button>
+      </form>
+    </div>
+  </section>
+
+  <footer>
+    &copy; 2025 Manix – Chrome Extension | Designed by Manish Sharma |
+    <a
+      href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd"
+      target="_blank"
+      rel="noopener"
+      >Chrome Web Store</a
+    >
+  </footer>
 </body>
 </html>
