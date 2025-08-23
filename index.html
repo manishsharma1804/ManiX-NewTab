@@ -5,678 +5,1367 @@
   <title>Manix – Smart Chrome New Tab Extension</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Manix is your all-in-one new tab extension for Chrome. Clean, fast, customizable, and privacy focused." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --main: #6c63ff;
-      --bg: #f9faff;
-      --dark: #21223d;
-      --light: #fff;
-      --accent: #00c9aa;
-      --gray-light: #f5f5f5;
-      --header-bg: #152238; /* deep navy blue */
-      --footer-bg: #f7f8fa;
-      --footer-text: #67798e;
+      --primary: #4f46e5;
+      --primary-light: #6366f1;
+      --primary-dark: #3730a3;
+      --secondary: #06b6d4;
+      --accent: #10b981;
+      --accent-light: #34d399;
+      --background: #fafbff;
+      --surface: #ffffff;
+      --surface-elevated: #f8fafc;
+      --text-primary: #0f172a;
+      --text-secondary: #475569;
+      --text-muted: #64748b;
+      --border: #e2e8f0;
+      --border-light: #f1f5f9;
+      --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+      --shadow: 0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+      --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+      --shadow-xl: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
+      --gradient-primary: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
+      --gradient-accent: linear-gradient(135deg, var(--secondary) 0%, var(--accent) 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      overflow-x: hidden;
     }
 
     body {
-      background: var(--bg);
-      color: var(--dark);
-      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-      transition: background 0.3s;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: var(--background);
+      color: var(--text-primary);
+      line-height: 1.6;
+      overflow-x: hidden;
+      font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
     }
 
-    /* Full-width Minimal Professional Header */
+    /* Smooth reveal animations */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal.revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .reveal-left {
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-left.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .reveal-right {
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .reveal-right.revealed {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .stagger-1 { transition-delay: 0.1s; }
+    .stagger-2 { transition-delay: 0.2s; }
+    .stagger-3 { transition-delay: 0.3s; }
+    .stagger-4 { transition-delay: 0.4s; }
+    .stagger-5 { transition-delay: 0.5s; }
+    .stagger-6 { transition-delay: 0.6s; }
+
+    /* Header */
     header {
-      background: var(--header-bg);
-      color: var(--light);
-      text-align: center;
-      padding: 0.8em 1.5em;
-      font-weight: 600;
-      position: sticky;
+      position: fixed;
       top: 0;
-      z-index: 20;
+      left: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.95);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border-light);
+      z-index: 1000;
+      padding: 1rem 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    header.scrolled {
+      background: rgba(255, 255, 255, 0.98);
+      box-shadow: var(--shadow);
+      padding: 0.75rem 0;
+    }
+
+    .header-content {
+      max-width: 1200px;
+      margin: 0 auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      max-width: 100vw;
-      box-sizing: border-box;
-      font-size: 1rem;
-      letter-spacing: 0.04em;
+      padding: 0 2rem;
     }
-    html, body {
-  overflow-x: hidden;
-  max-width: 100vw;
-}
-    header h1 {
-      margin: 0;
-      font-size: 1.4rem;
-      letter-spacing: 2px;
-      cursor: default;
-      user-select: none;
-      font-weight: 700;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+    .logo {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--primary);
+      text-decoration: none;
+      transition: all 0.3s ease;
     }
+
+    .logo:hover {
+      transform: scale(1.05);
+      color: var(--primary-light);
+    }
+
     nav {
       display: flex;
-      gap: 1.2em;
-      flex-wrap: wrap;
-      justify-content: flex-end;
-      flex-grow: 1;
-      max-width: 720px;
-      margin-left: 2em;
+      gap: 2rem;
+      align-items: center;
     }
+
     nav a {
-      color: var(--light);
+      color: var(--text-secondary);
       text-decoration: none;
       font-weight: 500;
-      transition: color 0.25s ease, background-color 0.25s ease;
-      padding: 0.25em 0.5em;
-      border-radius: 8px;
-      font-size: 0.9rem;
-      white-space: nowrap;
-    }
-    nav a:last-child {
-      background: var(--accent);
-      color: var(--dark);
-      font-weight: 700;
-      padding: 0.4em 1em;
-      border-radius: 20px;
-      transition: background-color 0.3s ease;
-    }
-    nav a:last-child:hover,
-    nav a:last-child:focus {
-      background: #33e3bf;
-      color: var(--dark);
-      outline: none;
-    }
-    nav a:hover,
-    nav a:focus {
-      color: #a9caff;
-      outline: none;
-    }
-
-    .intro {
-      padding: 2.1em 1em 2em 1em;
-      text-align: center;
-      margin-top: 1em;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-    }
-    .intro img {
-      max-width: 148px;
-      margin: 0 auto 1em auto;
-      animation: floating 2s infinite alternate;
-    }
-    @keyframes floating {
-      from {
-        transform: translateY(0);
-      }
-      to {
-        transform: translateY(-10px);
-      }
-    }
-    .intro h2 {
-      font-size: 2em;
-      margin: 0.6em 0;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-    }
-    .intro p {
-      font-weight: 500;
-      line-height: 1.4;
-      color: var(--dark);
-    }
-
-    .trust {
-      text-align: center;
-      padding: 1.2em 0.7em 0.2em 0.7em;
-      color: #606089;
-      font-size: 1.08em;
-      background: var(--gray-light);
-      max-width: 800px;
-      margin: 1.5em auto;
-      border-radius: 10px;
-      user-select: none;
-    }
-    .trust img {
-      width: 32px;
-      margin: 0 4px;
-      vertical-align: middle;
-      opacity: 0.6;
-      user-select: none;
-    }
-
-    .features {
-      max-width: 950px;
-      margin: 2em auto 1.3em auto;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      grid-gap: 1.6em;
-      padding: 0 1em;
-    }
-    .feature-card {
-      background: var(--light);
-      border-radius: 17px;
-      box-shadow: 0 1px 7px rgba(0, 0, 0, 0.07);
-      padding: 1.35em 1em;
-      text-align: center;
-      transition: transform 0.28s;
-      cursor: pointer;
-      border: 1px solid #f0f3ff;
-      font-weight: 500;
-    }
-    .feature-card:hover {
-      transform: translateY(-7px) scale(1.04);
-      box-shadow: 0 8px 24px #6c63ff34;
-    }
-    .feature-card h3 {
-      color: var(--main);
-      margin-top: 0;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-
-    .cta {
-      background: var(--main);
-      color: var(--light);
-      text-align: center;
-      padding: 2em 1em 3em 1em;
-      border-radius: 9px;
-      margin: 2em 1em;
-      max-width: 800px;
-      margin-left: auto;
-      margin-right: auto;
-      font-weight: 600;
-      letter-spacing: 0.03em;
-    }
-    .cta button {
-      font-size: 1.15em;
-      background: var(--accent);
-      color: var(--dark);
-      border: none;
-      border-radius: 100px;
-      padding: 0.75em 1.8em;
-      margin-top: 1em;
-      font-weight: 700;
-      box-shadow: 0 2px 8px #00c9aa22;
-      cursor: pointer;
-      transition: background 0.22s;
-      letter-spacing: 0.02em;
-    }
-    .cta button:hover {
-      background: #18ffe1;
-      color: #21223d;
-    }
-
-    .why-manix {
-      max-width: 1000px;
-      margin: 3em auto;
-      padding: 0 1em;
-    }
-    .why-manix h2 {
-      text-align: center;
-      color: #6c63ff;
-      margin-bottom: 2em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .why-row {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      margin-bottom: 3em;
-    }
-    .why-row:nth-child(even) {
-      flex-direction: row-reverse;
-    }
-    .why-row img {
-      width: 88%;
-      max-width: 350px;
-      border-radius: 22px;
-      box-shadow: 0 1px 12px #6c63ff25;
-      margin: 0 auto;
-      display: block;
-    }
-    .why-row > div {
-      flex: 1;
-      min-width: 220px;
-    }
-    .why-row > div:first-child {
-      text-align: center;
-    }
-    .why-row h3 {
-      color: #6c63ff;
-      font-weight: 700;
-    }
-    .why-row p {
-      font-weight: 500;
-      line-height: 1.3em;
-      color: var(--dark);
-    }
-
-    .testimonials-section {
-      max-width: 900px;
-      margin: 2em auto;
-      padding: 0 1em;
-    }
-    .testimonials-section h2 {
-      text-align: center;
-      color: var(--main);
-      margin-bottom: 1.2em;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
-    .testimonials-slider {
+      font-size: 0.95rem;
+      transition: all 0.3s ease;
       position: relative;
-      background: var(--light);
-      border-radius: 18px;
-      box-shadow: 0 0px 12px #6c63ff12;
-      padding: 2em 1em 1.5em 1em;
+      padding: 0.5rem 0;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    nav a::after {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--gradient-primary);
+      transition: width 0.3s ease;
+    }
+
+    nav a:hover::after {
+      width: 100%;
+    }
+
+    .cta-button {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.75rem 1.5rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow);
+      border: none;
+      cursor: pointer;
+    }
+
+    .cta-button:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+    }
+
+    /* Mobile menu */
+    .mobile-menu-toggle {
+      display: none;
+      flex-direction: column;
+      cursor: pointer;
+      padding: 0.5rem;
+    }
+
+    .mobile-menu-toggle span {
+      width: 25px;
+      height: 3px;
+      background: var(--text-primary);
+      margin: 3px 0;
+      transition: 0.3s;
+      border-radius: 2px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 8rem 2rem 4rem;
       text-align: center;
-      min-height: 170px;
+      background: linear-gradient(135deg, var(--background) 0%, #f1f5f9 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 30% 20%, rgba(79, 70, 229, 0.1) 0%, transparent 50%),
+                  radial-gradient(circle at 70% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hero-logo {
+      width: 120px;
+      height: 120px;
+      margin: 0 auto 2rem;
+      background: var(--gradient-primary);
+      border-radius: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: white;
+      font-weight: 700;
+      box-shadow: var(--shadow-xl);
+      animation: float 3s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 800;
+      margin-bottom: 1.5rem;
+      background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1.2;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-weight: 400;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-bottom: 3rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow);
+      border: none;
+      cursor: pointer;
+      font-size: 1.1rem;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .btn-secondary {
+      background: var(--surface);
+      color: var(--text-primary);
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      box-shadow: var(--shadow);
+      border: 2px solid var(--border);
+      font-size: 1.1rem;
+    }
+
+    .btn-secondary:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-xl);
+      border-color: var(--primary);
+    }
+
+    .trust-indicators {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      color: var(--text-muted);
+      font-size: 0.95rem;
       font-weight: 500;
     }
-    .testimonial {
-      opacity: 0;
-      transition: opacity 0.5s;
+
+    .trust-indicators img {
+      width: 24px;
+      height: 24px;
+    }
+
+    /* Features Section */
+    .features {
+      padding: 6rem 2rem;
+      background: var(--surface);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .section-header h2 {
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .section-header p {
+      font-size: 1.2rem;
+      color: var(--text-secondary);
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .feature-card::before {
+      content: '';
       position: absolute;
-      width: 90%;
-      left: 5%;
       top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: var(--gradient-primary);
+      transform: scaleX(0);
+      transition: transform 0.3s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-8px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .feature-card:hover::before {
+      transform: scaleX(1);
+    }
+
+    .feature-icon {
+      width: 60px;
+      height: 60px;
+      background: var(--gradient-accent);
+      border-radius: 15px;
       display: flex;
-      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 1.5rem;
+      transition: all 0.3s ease;
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
+    }
+
+    .feature-card h3 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Why Section */
+    .why-section {
+      padding: 6rem 2rem;
+      background: var(--surface-elevated);
+    }
+
+    .why-grid {
+      display: grid;
+      gap: 4rem;
+      margin-top: 4rem;
+    }
+
+    .why-item {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
       align-items: center;
     }
-    .testimonial.show {
+
+    .why-item:nth-child(even) {
+      direction: rtl;
+    }
+
+    .why-item:nth-child(even) > * {
+      direction: ltr;
+    }
+
+    .why-content h3 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 1rem;
+      color: var(--text-primary);
+    }
+
+    .why-content p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    .why-image {
+      border-radius: 20px;
+      overflow: hidden;
+      box-shadow: var(--shadow-lg);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .why-image:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .why-image img {
+      width: 100%;
+      height: 300px;
+      object-fit: cover;
+      transition: all 0.4s ease;
+    }
+
+    .why-image:hover img {
+      transform: scale(1.05);
+    }
+
+    /* Testimonials */
+    .testimonials {
+      padding: 6rem 2rem;
+      background: var(--surface);
+    }
+
+    .testimonials-slider {
+      max-width: 800px;
+      margin: 0 auto;
+      position: relative;
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 3rem;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
+    }
+
+    .testimonial {
+      text-align: center;
+      opacity: 0;
+      position: absolute;
+      top: 3rem;
+      left: 3rem;
+      right: 3rem;
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(20px);
+    }
+
+    .testimonial.active {
       opacity: 1;
       position: relative;
+      top: 0;
+      left: 0;
+      right: 0;
+      transform: translateY(0);
     }
+
     .testimonial-avatar {
-      width: 56px;
-      height: 56px;
-      border-radius: 100px;
-      margin: 0 0 0.5em 0;
-      border: 2px solid var(--accent);
-      box-shadow: 0 1px 8px #6c63ff17;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      border: 4px solid var(--primary);
+      box-shadow: var(--shadow);
       object-fit: cover;
-      background: var(--gray-light);
     }
-    .testimonial-name {
-      font-weight: 700;
-      color: var(--main);
-    }
-    .testimonial-role {
-      font-size: 0.95em;
-      color: #888;
-    }
+
     .testimonial-quote {
+      font-size: 1.3rem;
       font-style: italic;
-      color: #555;
-      margin-bottom: 0.8em;
-      max-width: 620px;
-      line-height: 1.3;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+      line-height: 1.6;
     }
+
+    .testimonial-name {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .testimonial-role {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
     .testimonial-nav {
       display: flex;
       justify-content: center;
-      gap: 7px;
-      margin-top: 1em;
+      gap: 0.5rem;
+      margin-top: 2rem;
     }
+
     .testimonial-dot {
-      width: 11px;
-      height: 11px;
-      border-radius: 100px;
-      background: var(--accent);
-      opacity: 0.35;
-      cursor: pointer;
-      transition: opacity 0.2s;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: var(--border);
       border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
     }
+
     .testimonial-dot.active {
-      opacity: 0.92;
+      background: var(--primary);
+      transform: scale(1.2);
     }
 
-    .faq-section,
-    .contact-section {
-      max-width: 860px;
-      margin: 2em auto;
-      padding: 0 1em;
-      font-weight: 500;
+    /* FAQ Section */
+    .faq {
+      padding: 6rem 2rem;
+      background: var(--surface-elevated);
     }
-    .faq-section h2,
-    .contact-section h2 {
-      color: var(--main);
-      text-align: center;
-      font-weight: 700;
-      letter-spacing: 0.03em;
+
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
     }
+
     .faq-item {
-      margin: 1em 0;
-      background: #fafafa;
-      border-radius: 9px;
-      box-shadow: 0 1px 6px #6c63ff12;
-      padding: 1em 1.1em;
-      line-height: 1.3em;
-    }
-    .contact-section form input,
-    .contact-section form textarea {
-      width: 90%;
-      padding: 0.7em;
-      margin-bottom: 0.57em;
-      font-size: 1em;
-      border-radius: 8px;
-      border: 1px solid #ddd;
-      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-    }
-    .contact-section form textarea {
-      height: 4.1em;
-      resize: vertical;
-    }
-    .contact-section form button {
-      background: var(--main);
-      color: #fff;
-      border: none;
-      padding: 0.7em 1.4em;
-      border-radius: 100px;
-      margin-top: 0.8em;
-      cursor: pointer;
-      font-size: 1.08em;
-      font-weight: 700;
-      letter-spacing: 0.03em;
-      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
-    }
-    .contact-section form button:hover {
-      background: var(--accent);
-      color: var(--dark);
+      background: var(--surface);
+      border-radius: 15px;
+      margin-bottom: 1rem;
+      box-shadow: var(--shadow-sm);
+      border: 1px solid var(--border-light);
+      overflow: hidden;
+      transition: all 0.3s ease;
     }
 
-    /* Minimal Footer with full width */
-    footer {
-      background: var(--footer-bg);
-      color: var(--footer-text);
-      text-align: center;
-      font-size: 0.85em;
-      padding: 1.5em 1em;
-      margin-top: 2em;
-      border-top: 1px solid #d6dce9;
-      width: 100vw;
-      box-sizing: border-box;
-      user-select: none;
-      font-weight: 400;
-      font-family: system-ui, -apple-system, Roboto, Helvetica, Arial, sans-serif;
+    .faq-item:hover {
+      box-shadow: var(--shadow);
     }
-    footer a {
-      color: var(--main);
-      text-decoration: none;
+
+    .faq-question {
+      padding: 1.5rem;
       font-weight: 600;
-      transition: color 0.25s;
-    }
-    footer a:hover,
-    footer a:focus {
-      color: var(--accent);
-      outline: none;
+      color: var(--text-primary);
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      transition: all 0.3s ease;
     }
 
-    /* Responsive */
-    @media (max-width: 950px) {
-      .why-row {
-        flex-direction: column !important;
+    .faq-question:hover {
+      color: var(--primary);
+    }
+
+    .faq-answer {
+      padding: 0 1.5rem 1.5rem;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .faq-item.active .faq-answer {
+      max-height: 200px;
+    }
+
+    .faq-icon {
+      transition: transform 0.3s ease;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(45deg);
+    }
+
+    /* Contact Section */
+    .contact {
+      padding: 6rem 2rem;
+      background: var(--surface);
+    }
+
+    .contact-content {
+      max-width: 600px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .contact-form {
+      margin-top: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.5rem;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 500;
+      color: var(--text-primary);
+    }
+
+    .form-group input,
+    .form-group textarea {
+      width: 100%;
+      padding: 1rem;
+      border: 2px solid var(--border);
+      border-radius: 10px;
+      font-size: 1rem;
+      font-family: inherit;
+      transition: all 0.3s ease;
+      background: var(--surface);
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+    }
+
+    .form-group textarea {
+      resize: vertical;
+      min-height: 120px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--text-primary);
+      color: white;
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+
+    .footer-content {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: rgba(255, 255, 255, 0.8);
+      text-decoration: none;
+      transition: color 0.3s ease;
+    }
+
+    .footer-links a:hover {
+      color: white;
+    }
+
+    .footer-bottom {
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .header-content {
+        padding: 0 1rem;
       }
-      .why-row > div {
-        padding: unset !important;
+
+      nav {
+        display: none;
       }
-      .why-row img {
-        max-width: 290px;
+
+      .mobile-menu-toggle {
+        display: flex;
+      }
+
+      .hero {
+        padding: 6rem 1rem 3rem;
+      }
+
+      .hero-buttons {
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .features-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .feature-card {
+        padding: 1.5rem;
+      }
+
+      .why-item {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .why-item:nth-child(even) {
+        direction: ltr;
+      }
+
+      .testimonials-slider {
+        padding: 2rem 1.5rem;
+      }
+
+      .testimonial {
+        left: 1.5rem;
+        right: 1.5rem;
+      }
+
+      .testimonial.active {
+        left: 0;
+        right: 0;
       }
     }
-    @media (max-width: 700px) {
-      .features {
+
+    @media (max-width: 480px) {
+      .features-grid {
         grid-template-columns: 1fr;
       }
-      .intro img {
-        max-width: 80px;
+
+      .feature-card {
+        padding: 1.5rem;
       }
-      header h1 {
-        font-size: 1.2rem;
+
+      .hero h1 {
+        font-size: 2rem;
       }
-      nav {
-        gap: 0.8em;
-      }
-      nav a {
-        font-size: 0.85rem;
-        padding: 0.2em 0.35em;
-      }
-      .testimonials-slider {
-        padding: 1.4em 0.6em;
-      }
-      .why-row img {
-        max-width: 200px;
+
+      .hero p {
+        font-size: 1.1rem;
       }
     }
+
+    /* Scroll Progress Bar */
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 0%;
+      height: 3px;
+      background: var(--gradient-primary);
+      z-index: 1001;
+      transition: width 0.1s ease;
+    }
+
+    /* Loading Animation */
+    .loading {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: var(--surface);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 9999;
+      transition: opacity 0.5s ease;
+    }
+
+    .loading.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .spinner {
+      width: 50px;
+      height: 50px;
+      border: 4px solid var(--border);
+      border-top: 4px solid var(--primary);
+      border-radius: 50%;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+
+    .hero-logo-img {
+  width: 120px;   /* adjust as needed */
+  height: auto;
+  margin: auto; /* center + spacing below */
+  display: block;
+}
   </style>
 </head>
 <body>
-  <header>
-    <h1>Manix</h1>
-    <nav>
-      <a href="#features">Features</a>
-      <a href="#why">Why Manix?</a>
-      <a href="#testimonials">Testimonials</a>
-      <a href="#faq">FAQ</a>
-      <a href="#contact">Contact</a>
-      <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener">Install</a>
-    </nav>
+  <!-- Loading Screen -->
+  <div class="loading" id="loading">
+    <div class="spinner"></div>
+  </div>
+
+  <!-- Scroll Progress Bar -->
+  <div class="scroll-progress" id="scrollProgress"></div>
+
+  <!-- Header -->
+  <header id="header">
+    <div class="header-content">
+      <a href="#" class="logo">Manix</a>
+      <nav id="nav">
+        <a href="#features">Features</a>
+        <a href="#why">Why Manix?</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener" class="cta-button">Install Now</a>
+      </nav>
+      <div class="mobile-menu-toggle" id="mobileMenuToggle">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    </div>
   </header>
 
-  <div class="intro">
-    <img src="https://www.svgrepo.com/show/353622/chrome.svg" alt="Chrome Extension Logo" />
-    <h2>Upgrade Every New Tab—Make Chrome Work for You.</h2>
-    <p>
-      Manix instantly turns your Chrome new tab into a beautiful, customizable dashboard.
-      <br />
-      <b>Fast search • Smart tools • Shortcuts • Beautiful design • No data collection</b>
-    </p>
-  </div>
-
-  <div class="trust">
-    Trusted by users on
-    <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Chrome_web_store_icon_2019.png" alt="Chrome Web Store" title="Chrome Web Store" />
-    <img src="https://cdn-icons-png.flaticon.com/512/174/174857.png" alt="Reddit" title="Reddit" />
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732228.png" alt="Softonic" title="Softonic" />
-    <img src="https://cdn-icons-png.flaticon.com/512/732/732200.png" alt="Google News" title="Google News" />
-  </div>
-
-  <section class="features" id="features">
-    <div class="feature-card">
-      <h3>Custom Shortcuts</h3>
-      <p>Quickly access your favorite websites and Google Apps with easy-to-set shortcuts. No more searching or typing!</p>
-    </div>
-    <div class="feature-card">
-      <h3>Smart Search & Voice</h3>
-      <p>Find anything instantly with intelligent search and voice commands. Open new tabs with a whisper or a click.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Dynamic Clock & Date</h3>
-      <p>Stay organized with a real-time clock and date always visible on your new tab page.</p>
-    </div>
-    <div class="feature-card">
-      <h3>To-Do & Bookmarks</h3>
-      <p>Organize your tasks and manage bookmarks effortlessly—all from your Manix dashboard.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Privacy Focused</h3>
-      <p>Your data stays private. Manix does not collect or transmit any personal information.</p>
-    </div>
-    <div class="feature-card">
-      <h3>Stunning Wallpapers</h3>
-      <p>Pick from a curated gallery of beautiful backgrounds—freshen up every tab in style.</p>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-content">
+      <div class="hero-logo reveal">
+  <img src="resources/manix.png" alt="Manix Logo" class="hero-logo-img" />
+</div>
+      <h1 class="reveal stagger-1">Transform Every New Tab Into Your Personal Command Center</h1>
+      <p class="reveal stagger-2">Manix instantly turns your Chrome new tab into a beautiful, customizable dashboard with smart tools, shortcuts, and privacy-first design.</p>
+      <div class="hero-buttons reveal stagger-3">
+        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener" class="btn-primary">Add to Chrome - Free</a>
+        <a href="#features" class="btn-secondary">Explore Features</a>
+      </div>
+      <div class="trust-indicators reveal stagger-4">
+        <span>Trusted by 100+ users</span>
+        <img src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%234285f4'%3E%3Cpath d='M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z'/%3E%3Cpath d='M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z'/%3E%3Cpath d='M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z'/%3E%3Cpath d='M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z'/%3E%3C/svg%3E" alt="Chrome Web Store">
+        <span>Chrome Web Store</span>
+      </div>
     </div>
   </section>
 
-  <div class="cta">
-    <h2>Ready to supercharge Chrome?</h2>
-    <p>Get Manix from the Chrome Web Store! Join users who love efficient, beautiful browsing.</p>
-    <button onclick="window.open('https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd','_blank')">Add to Chrome</button>
-  </div>
-
-  <section class="why-manix" id="why">
-    <h2>Why Choose Manix?</h2>
-    <div class="why-row">
-      <div>
-        <img src="https://images.unsplash.com/photo-1461749280684-dccba630e2f6?auto=format&fit=crop&w=320&q=80" alt="Productivity" />
+  <!-- Features Section -->
+  <section class="features" id="features">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Powerful Features for Power Users</h2>
+        <p>Everything you need to supercharge your browsing experience, built with privacy and performance in mind.</p>
       </div>
-      <div style="padding-left: 3vw;">
-        <h3>Boost Your Productivity</h3>
-        <p>
-          Manix helps you focus with a clean dashboard, custom shortcuts, quick search, and distraction-free design. Get more done every day.
+      <div class="features-grid">
+        <div class="feature-card reveal stagger-1">
+          <div class="feature-icon">🚀</div>
+          <h3>Lightning Fast Shortcuts</h3>
+          <p>Access your favorite websites and Google Apps instantly with customizable shortcuts. No more bookmarks hunting or typing long URLs.</p>
+        </div>
+        <div class="feature-card reveal stagger-2">
+          <div class="feature-icon">🎤</div>
+          <h3>Smart Search & Voice</h3>
+          <p>Find anything with intelligent search powered by Google. Voice commands let you open tabs and search hands-free.</p>
+        </div>
+        <div class="feature-card reveal stagger-3">
+          <div class="feature-icon">⏰</div>
+          <h3>Live Clock & Calendar</h3>
+          <p>Stay on top of your schedule with a beautiful real-time clock, date display, and quick calendar access.</p>
+        </div>
+        <div class="feature-card reveal stagger-4">
+          <div class="feature-icon">✅</div>
+          <h3>Integrated Productivity</h3>
+          <p>Manage tasks, organize bookmarks, and track your daily goals without leaving your new tab page.</p>
+        </div>
+        <div class="feature-card reveal stagger-5">
+          <div class="feature-icon">🔒</div>
+          <h3>Privacy by Design</h3>
+          <p>Zero data collection, no tracking, no analytics. Your browsing habits stay completely private and secure.</p>
+        </div>
+        <div class="feature-card reveal stagger-6">
+          <div class="feature-icon">🎨</div>
+          <h3>Beautiful Customization</h3>
+          <p>Choose from stunning wallpapers and themes. Customize layouts, colors, and widgets to match your style.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Section -->
+  <section class="why-section" id="why">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Why Choose Manix?</h2>
+        <p>Join thousands of users who've transformed their browsing experience with Manix.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-item">
+          <div class="why-content reveal-left">
+            <h3>Boost Your Productivity</h3>
+            <p>Transform dead time into productive moments. With instant access to your tools, shortcuts, and tasks, you'll accomplish more in less time. Studies show users save 2+ hours per week with organized new tab workflows.</p>
+          </div>
+          <div class="why-image reveal-right">
+            <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=500&q=80" alt="Productivity Dashboard">
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-content reveal-right">
+            <h3>Personalize Your Experience</h3>
+            <p>Make Chrome truly yours with beautiful themes, custom layouts, and personalized shortcuts. Every element is designed to adapt to your workflow and aesthetic preferences.</p>
+          </div>
+          <div class="why-image reveal-left">
+            <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=500&q=80" alt="Customization Options">
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-content reveal-left">
+            <h3>Privacy You Can Trust</h3>
+            <p>Unlike other extensions, Manix operates entirely offline. No data collection, no tracking pixels, no analytics. Your browsing habits remain completely private and secure.</p>
+          </div>
+          <div class="why-image reveal-right">
+            <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=500&q=80" alt="Privacy and Security">
+          </div>
+        </div>
+        <div class="why-item">
+          <div class="why-content reveal-right">
+            <h3>Instant Setup & Use</h3>
+            <p>Get started in under 30 seconds. One-click installation from Chrome Web Store, and you're ready to go. No accounts, no configuration complexity, no learning curve.</p>
+          </div>
+          <div class="why-image reveal-left">
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt="Easy Setup">
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+<!-- Testimonials Section -->
+<section class="testimonials" id="testimonials">
+  <div class="container">
+    <div class="section-header reveal">
+      <h2>What Users Say About Manix</h2>
+      <p>Real feedback from real users who've transformed their browsing experience.</p>
+    </div>
+    <div class="testimonials-slider reveal" id="testimonials-slider">
+      <!-- Testimonials will be injected here -->
+    </div>
+  </div>
+</section>
+
+<script>
+  /* ------------------ Fetch & Render Testimonials ------------------ */
+  function loadTestimonials() {
+    const slider = document.getElementById("testimonials-slider");
+
+    fetch("testimonials.json")
+      .then(res => res.json())
+      .then(testimonials => {
+        // Insert testimonials dynamically
+        slider.innerHTML = `
+          ${testimonials
+            .map(
+              (t, i) => `
+            <div class="testimonial ${i === 0 ? "active" : ""}">
+              <img src="${t.avatar}" alt="${t.name}" class="testimonial-avatar">
+              <div class="testimonial-quote">"${t.quote}"</div>
+              <div class="testimonial-name">${t.name}</div>
+              ${t.role ? `<div class="testimonial-role">${t.role}</div>` : ""}
+            </div>
+          `
+            )
+            .join("")}
+          <div class="testimonial-nav">
+            ${testimonials
+              .map(
+                (_, i) =>
+                  `<button class="testimonial-dot ${
+                    i === 0 ? "active" : ""
+                  }" data-index="${i}"></button>`
+              )
+              .join("")}
+          </div>
+        `;
+
+        initTestimonialSlider();
+      })
+      .catch(err => {
+        console.error("Error loading testimonials:", err);
+        slider.innerHTML = `<p class="text-center text-gray-500">Failed to load testimonials.</p>`;
+      });
+  }
+
+  function initTestimonialSlider() {
+    const testimonials = document.querySelectorAll(".testimonial");
+    const dots = document.querySelectorAll(".testimonial-dot");
+    let index = 0;
+
+    function showTestimonial(i) {
+      testimonials.forEach((t, idx) => t.classList.toggle("active", idx === i));
+      dots.forEach((d, idx) => d.classList.toggle("active", idx === i));
+      index = i;
+    }
+
+    // Dot navigation
+    dots.forEach(dot => {
+      dot.addEventListener("click", () =>
+        showTestimonial(parseInt(dot.dataset.index))
+      );
+    });
+
+    // Auto-slide every 8s
+    setInterval(() => {
+      index = (index + 1) % testimonials.length;
+      showTestimonial(index);
+    }, 8000);
+  }
+
+  // Call it on page load
+  document.addEventListener("DOMContentLoaded", loadTestimonials);
+</script>
+
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>Frequently Asked Questions</h2>
+        <p>Everything you need to know about Manix.</p>
+      </div>
+      <div class="faq-list">
+        <div class="faq-item reveal stagger-1">
+          <div class="faq-question">
+            <span>Is Manix completely free?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes! Manix is completely free with no hidden costs, premium tiers, or subscription fees. All features are available to everyone.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-2">
+          <div class="faq-question">
+            <span>Does Manix collect my data?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Absolutely not. Manix operates entirely offline and doesn't collect, store, or transmit any personal data. Your privacy is our top priority.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-3">
+          <div class="faq-question">
+            <span>How do I customize my shortcuts?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Simply click the settings icon on your new tab page. You can add, edit, or remove shortcuts with just a few clicks. Drag and drop to reorder them.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-4">
+          <div class="faq-question">
+            <span>Will Manix slow down my browser?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            No! Manix is built for performance with minimal resource usage. It's optimized to load instantly and won't affect your browser's speed.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-5">
+          <div class="faq-question">
+            <span>Can I sync my settings across devices?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Yes! Your Manix settings automatically sync across all your Chrome browsers when you're signed into your Google account.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="contact" id="contact">
+    <div class="container">
+      <div class="contact-content reveal">
+        <h2>Get in Touch</h2>
+        <p>Have questions, feedback, or suggestions? We'd love to hear from you!</p>
+        <div class="contact-form">
+          <form onsubmit="handleFormSubmit(event)">
+            <div class="form-group">
+              <label for="email">Your Email</label>
+              <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+              <label for="message">Message</label>
+              <textarea id="message" name="message" placeholder="Tell us what you think about Manix or how we can improve..." required></textarea>
+            </div>
+            <button type="submit" class="btn-primary">Send Message</button>
+          </form>
+        </div>
+        <p style="margin-top: 2rem;">
+          Made with ❤️ by <strong>Manish Sharma</strong><br>
+          <a href="mailto:contact@manishsharma18.in" style="color: var(--primary); font-weight: 600;">contact@manishsharma18.in</a>
         </p>
       </div>
     </div>
-    <div class="why-row">
-      <div>
-        <img src="https://images.unsplash.com/photo-1506744038136-46273834b3fb?auto=format&fit=crop&w=320&q=80" alt="Customization" />
-      </div>
-      <div style="padding-right: 3vw;">
-        <h3>Customize Your Experience</h3>
-        <p>Choose gorgeous wallpapers and tailor your tab layout. Enjoy a workspace that truly reflects your style and needs.</p>
-      </div>
-    </div>
-    <div class="why-row">
-      <div>
-        <img src="https://images.unsplash.com/photo-1519125323398-675f0ddb6308?auto=format&fit=crop&w=320&q=80" alt="Privacy" />
-      </div>
-      <div style="padding-left: 3vw;">
-        <h3>Privacy First</h3>
-        <p>Your data is never tracked. Manix puts privacy at the core, so you can browse safely and confidently.</p>
-      </div>
-    </div>
-    <div class="why-row">
-      <div>
-        <img src="https://images.unsplash.com/photo-1519985176271-adb1088fa94c?auto=format&fit=crop&w=320&q=80" alt="Simplicity" />
-      </div>
-      <div style="padding-right: 3vw;">
-        <h3>Quick & Simple Setup</h3>
-        <p>Install Manix in seconds and start using your new tab right away. All features are intuitive and easy to configure.</p>
-      </div>
-    </div>
   </section>
 
-  <section class="testimonials-section" id="testimonials">
-    <h2>What Users Say About Manix</h2>
-    <div class="testimonials-slider">
-      <div class="testimonial show">
-        <img src="https://randomuser.me/api/portraits/men/36.jpg" alt="User1" class="testimonial-avatar" />
-        <div class="testimonial-quote">“Manix has totally upgraded my browser routine. It’s clean, fast, and feels personal. Love the shortcuts and voice search!”</div>
-        <div class="testimonial-name">Rahul S.</div>
-        <div class="testimonial-role">UI Designer</div>
-      </div>
-      <div class="testimonial">
-        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="User2" class="testimonial-avatar" />
-        <div class="testimonial-quote">“I really appreciate the privacy focus—no tracking and no ads. It’s the perfect productivity hub for Chrome!”</div>
-        <div class="testimonial-name">Arpita J.</div>
-        <div class="testimonial-role">Product Manager</div>
-      </div>
-      <div class="testimonial">
-        <img src="https://randomuser.me/api/portraits/men/53.jpg" alt="User3" class="testimonial-avatar" />
-        <div class="testimonial-quote">“The wallpaper gallery is stunning, and the to-do feature keeps me on task. Manix makes Chrome feel new again.”</div>
-        <div class="testimonial-name">Jayant T.</div>
-        <div class="testimonial-role">Graduate Student</div>
-      </div>
-      <div class="testimonial">
-        <img src="https://randomuser.me/api/portraits/women/41.jpg" alt="User4" class="testimonial-avatar" />
-        <div class="testimonial-quote">“Manix lets me customize everything. My most-used bookmarks are a click away. Setup was super simple.”</div>
-        <div class="testimonial-name">Divya K.</div>
-        <div class="testimonial-role">Freelance Writer</div>
-      </div>
-      <div class="testimonial">
-        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="User5" class="testimonial-avatar" />
-        <div class="testimonial-quote">“Finally a tab extension that isn’t bloated. Fast, lightweight, and just works. Highly recommended!”</div>
-        <div class="testimonial-name">Ashwin M.</div>
-        <div class="testimonial-role">Engineer</div>
-      </div>
-      <div class="testimonial-nav"></div>
-    </div>
-    <script>
-      // Simple testimonials slider (no external JS needed)
-      const testimonials = document.querySelectorAll('.testimonial');
-      const nav = document.querySelector('.testimonial-nav');
-      let currentTestimonial = 0;
-      testimonials.forEach((_, i) => {
-        const dot = document.createElement('button');
-        dot.className = 'testimonial-dot' + (i === 0 ? ' active' : '');
-        dot.onclick = () => showTestimonial(i);
-        nav.appendChild(dot);
-      });
-      function showTestimonial(i) {
-        testimonials[currentTestimonial].classList.remove('show');
-        nav.children[currentTestimonial].classList.remove('active');
-        testimonials[i].classList.add('show');
-        nav.children[i].classList.add('active');
-        currentTestimonial = i;
-      }
-      // Auto-advance every 7s
-      setInterval(() => {
-        let next = (currentTestimonial + 1) % testimonials.length;
-        showTestimonial(next);
-      }, 7000);
-    </script>
-  </section>
-
-  <section class="faq-section" id="faq">
-    <h2>Frequently Asked Questions</h2>
-    <div class="faq-item">
-      <b>Is Manix free?</b><br />
-      Yes, fully free for everyone.
-    </div>
-    <div class="faq-item">
-      <b>Does Manix collect my data?</b><br />
-      No, your privacy is our priority—Manix does not collect or sell any user data.
-      <br />
-    </div>
-    <div class="faq-item">
-      <b>How do I customize shortcuts?</b><br />
-      Just click the settings icon on your new tab page to add or edit links.
-    </div>
-    <div class="faq-item">
-      <b>Who is Manix for?</b><br />
-      Anyone who wants efficient, beautiful, and distraction-free browsing.
-    </div>
-  </section>
-
-  <section class="contact-section" id="contact">
-    <h2>Contact & Feedback</h2>
-    <div style="text-align: center">
-      <p>
-        Made by <b>Manish Sharma</b>
-        <br />
-        <a href="mailto:contact@manishsharma18.in"
-          style="color: var(--main); font-weight: 700; text-decoration: underline"
-          >contact@manishsharma18.in</a
-        >
-      </p>
-      <form
-        onsubmit="alert('Thanks for your feedback!');return false;"
-        style="max-width: 450px; margin: 1em auto"
-      >
-        <input type="text" required placeholder="Your Email" />
-        <textarea required placeholder="Feedback or message..."></textarea>
-        <br />
-        <button>Send</button>
-      </form>
-    </div>
-  </section>
-
+  <!-- Footer -->
   <footer>
-    &copy; 2025 Manix – Chrome Extension | Designed by Manish Sharma |
-    <a
-      href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd"
-      target="_blank"
-      rel="noopener"
-      >Chrome Web Store</a
-    >
+    <div class="footer-content">
+      <div class="footer-links">
+        <a href="#features">Features</a>
+        <a href="#why">Why Manix</a>
+        <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener">Chrome Web Store</a>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Manix Chrome Extension. All rights reserved. | Designed with care by Manish Sharma</p>
+      </div>
+    </div>
   </footer>
+
+  <script>
+    // Loading Screen
+    window.addEventListener('load', () => {
+      const loading = document.getElementById('loading');
+      setTimeout(() => {
+        loading.classList.add('hidden');
+      }, 1000);
+    });
+
+    // Scroll Progress Bar
+    window.addEventListener('scroll', () => {
+      const scrollProgress = document.getElementById('scrollProgress');
+      const scrollTop = window.pageYOffset;
+      const docHeight = document.body.scrollHeight - window.innerHeight;
+      const scrollPercent = (scrollTop / docHeight) * 100;
+      scrollProgress.style.width = scrollPercent + '%';
+    });
+
+    // Header Scroll Effect
+    window.addEventListener('scroll', () => {
+      const header = document.getElementById('header');
+      if (window.scrollY > 100) {
+        header.classList.add('scrolled');
+      } else {
+        header.classList.remove('scrolled');
+      }
+    });
+
+    // Smooth Reveal Animations
+    const observerOptions = {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('revealed');
+        }
+      });
+    }, observerOptions);
+
+    // Observe all reveal elements
+    document.querySelectorAll('.reveal, .reveal-left, .reveal-right').forEach(el => {
+      observer.observe(el);
+    });
+
+    // Testimonials Slider
+    let currentTestimonial = 0;
+    const testimonials = document.querySelectorAll('.testimonial');
+    const testimonialDots = document.querySelectorAll('.testimonial-dot');
+
+    function showTestimonial(index) {
+      testimonials[currentTestimonial].classList.remove('active');
+      testimonialDots[currentTestimonial].classList.remove('active');
+      
+      currentTestimonial = index;
+      
+      testimonials[currentTestimonial].classList.add('active');
+      testimonialDots[currentTestimonial].classList.add('active');
+    }
+
+    // Auto-advance testimonials
+    setInterval(() => {
+      const nextIndex = (currentTestimonial + 1) % testimonials.length;
+      showTestimonial(nextIndex);
+    }, 5000);
+
+    // FAQ Accordion
+    document.querySelectorAll('.faq-question').forEach(question => {
+      question.addEventListener('click', () => {
+        const faqItem = question.parentElement;
+        const isActive = faqItem.classList.contains('active');
+        
+        // Close all FAQ items
+        document.querySelectorAll('.faq-item').forEach(item => {
+          item.classList.remove('active');
+        });
+        
+        // Open clicked item if it wasn't active
+        if (!isActive) {
+          faqItem.classList.add('active');
+        }
+      });
+    });
+
+    // Form Submission
+    function handleFormSubmit(event) {
+      event.preventDefault();
+      const form = event.target;
+      const formData = new FormData(form);
+      
+      // Simulate form submission
+      const button = form.querySelector('button');
+      const originalText = button.textContent;
+      button.textContent = 'Sending...';
+      button.disabled = true;
+      
+      setTimeout(() => {
+        alert('Thank you for your message! We\'ll get back to you soon.');
+        form.reset();
+        button.textContent = originalText;
+        button.disabled = false;
+      }, 1500);
+    }
+
+    // Smooth Scrolling for Navigation Links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        e.preventDefault();
+        const target = document.querySelector(this.getAttribute('href'));
+        if (target) {
+          const headerHeight = document.getElementById('header').offsetHeight;
+          const targetPosition = target.offsetTop - headerHeight - 20;
+          
+          window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Mobile Menu Toggle (for future implementation)
+    const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+    const nav = document.getElementById('nav');
+    
+    mobileMenuToggle.addEventListener('click', () => {
+      nav.classList.toggle('active');
+      mobileMenuToggle.classList.toggle('active');
+    });
+
+    // Parallax Effect for Hero Section
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const hero = document.querySelector('.hero');
+      const rate = scrolled * -0.5;
+      
+      if (hero) {
+        hero.style.transform = `translateY(${rate}px)`;
+      }
+    });
+
+    // Add some interactive hover effects
+    document.querySelectorAll('.feature-card').forEach(card => {
+      card.addEventListener('mouseenter', () => {
+        card.style.transform = 'translateY(-8px) scale(1.02)';
+      });
+      
+      card.addEventListener('mouseleave', () => {
+        card.style.transform = 'translateY(0) scale(1)';
+      });
+    });
+
+    // Typing effect for hero title (optional enhancement)
+    function typeWriter(element, text, speed = 50) {
+      let i = 0;
+      element.innerHTML = '';
+      
+      function type() {
+        if (i < text.length) {
+          element.innerHTML += text.charAt(i);
+          i++;
+          setTimeout(type, speed);
+        }
+      }
+      
+      type();
+    }
+
+    // Initialize typing effect after page load
+    setTimeout(() => {
+      const heroTitle = document.querySelector('.hero h1');
+      if (heroTitle) {
+        const originalText = heroTitle.textContent;
+        typeWriter(heroTitle, originalText, 30);
+      }
+    }, 1500);
+  </script>
 </body>
 </html>

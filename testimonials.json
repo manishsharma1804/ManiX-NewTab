@@ -1,0 +1,26 @@
+[  
+    {
+    "avatar": "resources/testimonials/pranit.png",
+    "quote": "I really appreciate the privacy focus—no tracking and no ads. It’s the perfect productivity hub for Chrome!",
+    "name": "Pranit Pathak",
+    "role": "Content Creator"
+  },
+  {
+    "avatar": "resources/testimonials/sahil.png",
+    "quote": "Very minimalist and also less distracting and soothing at the same time...Great in built tools to solve daily tasks...Extension se pyaar hogya hai",
+    "name": "Sahil Singh",
+    "role": ""
+  },
+    {
+    "avatar": "resources/testimonials/anish.png",
+    "quote": "I like that Manix is clean and minimal. Unlike other new-tab extensions that feel overloaded, this one gives me exactly what I need without distracting clutter. It keeps me focused while still looking elegant",
+    "name": "Anish",
+    "role": ""
+  },
+  {
+    "avatar": "resources/testimonials/riya.jpg",
+    "quote": "ManiX is a game-changer! Clean design, handy tools, and everything I need right on my new tab—without slowing down my browser. It’s boosted my productivity and made browsing so much smoother!",
+    "name": "Riya Kumari",
+    "role": ""
+  }
+]
