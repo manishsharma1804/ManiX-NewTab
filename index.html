@@ -9,6 +9,9 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   
+  <!-- Updated Font Awesome CDN with better fallback -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
   <style>
     :root {
       --primary: #4f46e5;
@@ -124,17 +127,45 @@
     }
 
     .logo {
-      font-family: 'JetBrains Mono', monospace;
+      font-family: 'Arial', sans-serif;
       font-size: 1.5rem;
       font-weight: 600;
       color: var(--primary);
       text-decoration: none;
-      transition: all 0.3s ease;
     }
 
-    .logo:hover {
-      transform: scale(1.05);
-      color: var(--primary-light);
+    .logo-container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0; /* No gap between elements */
+    }
+
+    .logo-text {
+      font-size: 1.3rem; /* Reduced from 1.5rem to 1.3rem */
+      font-weight: 600;
+      color: var(--primary);
+      letter-spacing: 1px;
+      margin: 0; /* Ensure no default margins */
+      line-height: 1; /* Tight line height */
+    }
+
+    .logo-x {
+      color: #dc2626;
+      font-weight: 600;
+      font-size: 1.3rem; /* Match the reduced size */
+    }
+
+    .logo-slogan {
+      font-family: 'Georgia', serif;
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.3px;
+      line-height: 1;
+      margin: 0; /* Ensure no default margins */
+      margin-top: -0.1rem; /* Slight negative margin to bring closer */
     }
 
     nav {
@@ -166,10 +197,12 @@
       height: 2px;
       background: var(--gradient-primary);
       transition: width 0.3s ease;
+      display: none; /* Hide the underline effect */
     }
 
     nav a:hover::after {
       width: 100%;
+      display: none; /* Ensure it stays hidden on hover */
     }
 
     .cta-button {
@@ -183,11 +216,19 @@
       box-shadow: var(--shadow);
       border: none;
       cursor: pointer;
+      display: inline-flex;
+      align-items: center;
     }
 
     .cta-button:hover {
       transform: translateY(-2px);
       box-shadow: var(--shadow-lg);
+      color: white;
+      background: var(--gradient-primary);
+    }
+
+    .cta-button::after {
+      display: none !important; /* Specifically hide underline for Install Now button */
     }
 
     /* Mobile menu */
@@ -196,6 +237,7 @@
       flex-direction: column;
       cursor: pointer;
       padding: 0.5rem;
+      z-index: 1001;
     }
 
     .mobile-menu-toggle span {
@@ -205,6 +247,90 @@
       margin: 3px 0;
       transition: 0.3s;
       border-radius: 2px;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(1) {
+      transform: rotate(-45deg) translate(-5px, 6px);
+    }
+
+    .mobile-menu-toggle.active span:nth-child(2) {
+      opacity: 0;
+    }
+
+    .mobile-menu-toggle.active span:nth-child(3) {
+      transform: rotate(45deg) translate(-5px, -6px);
+    }
+
+    /* Mobile Sidebar */
+    .mobile-sidebar {
+      position: fixed;
+      top: 100px; /* Increased gap from 80px to 100px */
+      right: -100%;
+      width: 280px;
+      height: auto;
+      max-height: calc(100vh - 100px);
+      background: rgba(255, 255, 255, 0.98);
+      backdrop-filter: blur(20px);
+      z-index: 1000;
+      transition: right 0.3s ease;
+      box-shadow: -5px 0 20px rgba(0, 0, 0, 0.1);
+      border-left: 1px solid #e5e7eb;
+      display: none;
+      overflow-y: auto;
+      border-radius: 0 0 0 12px;
+    }
+
+    .mobile-sidebar.active {
+      right: 0;
+      display: block !important;
+    }
+
+    .mobile-sidebar-nav {
+      padding: 1rem 0;
+      display: block !important;
+    }
+
+    .mobile-sidebar-nav a {
+      display: block !important;
+      padding: 1rem 1.5rem;
+      color: #1f2937 !important;
+      text-decoration: none;
+      font-weight: 500;
+      transition: all 0.3s ease;
+      border-bottom: 1px solid #e5e7eb;
+      background: transparent;
+      position: relative;
+      z-index: 1001;
+    }
+
+    .mobile-sidebar-nav a:hover {
+      background: #f9fafb;
+      color: #dc2626 !important;
+      padding-left: 2rem;
+    }
+
+    .mobile-sidebar-message {
+      background: #f8fafc;
+      border-top: 1px solid #e5e7eb;
+    }
+
+    /* Mobile overlay */
+    .mobile-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+    }
+
+    .mobile-overlay.active {
+      opacity: 1;
+      visibility: visible;
     }
 
     /* Hero Section */
@@ -335,6 +461,32 @@
       height: 24px;
     }
 
+    /* Version Info Styles */
+    .version-info {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+
+    .version-badge {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      font-weight: 600;
+      font-size: 0.8rem;
+      letter-spacing: 0.5px;
+    }
+
+    .last-updated {
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
     /* Features Section */
     .features {
       padding: 6rem 2rem;
@@ -366,9 +518,11 @@
     }
 
     .features-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+      display: flex;
+      flex-wrap: wrap;
       gap: 2rem;
+      justify-content: center; /* Center all cards */
+      align-items: stretch;
     }
 
     .feature-card {
@@ -380,6 +534,9 @@
       transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
       position: relative;
       overflow: hidden;
+      flex: 0 1 350px; /* Don't grow, can shrink, base width 350px */
+      min-width: 300px; /* Minimum width */
+      max-width: 400px; /* Maximum width */
     }
 
     .feature-card::before {
@@ -392,6 +549,7 @@
       background: var(--gradient-primary);
       transform: scaleX(0);
       transition: transform 0.3s ease;
+      display: none; /* Hide the blue line completely */
     }
 
     .feature-card:hover {
@@ -401,23 +559,7 @@
 
     .feature-card:hover::before {
       transform: scaleX(1);
-    }
-
-    .feature-icon {
-      width: 60px;
-      height: 60px;
-      background: var(--gradient-accent);
-      border-radius: 15px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.5rem;
-      margin-bottom: 1.5rem;
-      transition: all 0.3s ease;
-    }
-
-    .feature-card:hover .feature-icon {
-      transform: scale(1.1) rotate(5deg);
+      display: none; /* Ensure it stays hidden on hover */
     }
 
     .feature-card h3 {
@@ -425,6 +567,29 @@
       font-weight: 600;
       margin-bottom: 1rem;
       color: var(--text-primary);
+      display: flex;
+      align-items: center;
+      gap: 0.75rem; /* Space between icon and text */
+      line-height: 1.2; /* Reduced line height for tighter spacing */
+    }
+
+    .feature-icon {
+      width: 50px;
+      height: 50px;
+      background: none; /* Removed background */
+      border-radius: 0; /* Removed border radius since no background */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem; /* Increased to match the 50x50px container size */
+      margin-bottom: 0;
+      transition: all 0.3s ease;
+      flex-shrink: 0;
+      color: var(--primary); /* Added primary color for the icon itself */
+    }
+
+    .feature-card:hover .feature-icon {
+      transform: scale(1.1) rotate(5deg);
     }
 
     .feature-card p {
@@ -625,20 +790,28 @@
     }
 
     .faq-answer {
-      padding: 0 1.5rem 1.5rem;
+      padding: 0 1.5rem 0; /* Removed bottom padding to reduce gap */
       color: var(--text-secondary);
       line-height: 1.6;
       max-height: 0;
       overflow: hidden;
       transition: all 0.3s ease;
+      opacity: 0;
+      transform: translateY(-10px);
     }
 
     .faq-item.active .faq-answer {
       max-height: 200px;
+      opacity: 1;
+      transform: translateY(0);
+      padding-bottom: 1.5rem; /* Add bottom padding only when active */
     }
 
     .faq-icon {
       transition: transform 0.3s ease;
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: var(--primary);
     }
 
     .faq-item.active .faq-icon {
@@ -657,57 +830,170 @@
       text-align: center;
     }
 
-    .contact-form {
-      margin-top: 2rem;
-    }
-
-    .form-group {
-      margin-bottom: 1.5rem;
-      text-align: left;
-    }
-
-    .form-group label {
-      display: block;
-      margin-bottom: 0.5rem;
-      font-weight: 500;
-      color: var(--text-primary);
-    }
-
-    .form-group input,
-    .form-group textarea {
-      width: 100%;
-      padding: 1rem;
-      border: 2px solid var(--border);
-      border-radius: 10px;
-      font-size: 1rem;
-      font-family: inherit;
+    .contact-card {
+      background: var(--surface-elevated);
+      border-radius: 20px;
+      padding: 3rem 2rem;
+      margin: 3rem 0;
+      box-shadow: var(--shadow-lg);
+      border: 1px solid var(--border-light);
       transition: all 0.3s ease;
-      background: var(--surface);
     }
 
-    .form-group input:focus,
-    .form-group textarea:focus {
-      outline: none;
+    .contact-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .contact-icon {
+      width: 80px;
+      height: 80px;
+      background: var(--gradient-primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      color: white;
+      font-size: 2rem;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .contact-details h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .contact-details p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      font-size: 1.1rem;
+    }
+
+    .contact-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--gradient-primary);
+      color: white;
+      padding: 1rem 2rem;
+      border-radius: 50px;
+      text-decoration: none;
+      font-weight: 600;
+      font-size: 1.1rem;
+      transition: all 0.3s ease;
+      box-shadow: var(--shadow);
+    }
+
+    .contact-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      color: white;
+    }
+
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 2rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+
+    .social-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: var(--text-secondary);
+      text-decoration: none;
+      padding: 0.75rem 1.5rem;
+      border-radius: 25px;
+      border: 2px solid var(--border);
+      transition: all 0.3s ease;
+      font-weight: 500;
+    }
+
+    .social-link:hover {
+      color: var(--primary);
       border-color: var(--primary);
-      box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+      transform: translateY(-2px);
+      box-shadow: var(--shadow);
     }
 
-    .form-group textarea {
-      resize: vertical;
-      min-height: 120px;
+    .social-link i {
+      font-size: 1.2rem;
+    }
+
+    @media (max-width: 768px) {
+      .contact-card {
+        padding: 2rem 1.5rem;
+      }
+      
+      .contact-links {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+      }
+      
+      .social-link {
+        width: 100%;
+        max-width: 250px;
+        justify-content: center;
+      }
     }
 
     /* Footer */
     footer {
       background: var(--text-primary);
       color: white;
-      padding: 3rem 2rem 2rem;
+      padding: 2rem 2rem 1.5rem; /* Reduced from 3rem 2rem 2rem */
       text-align: center;
     }
 
     .footer-content {
       max-width: 1200px;
       margin: 0 auto;
+    }
+
+    .footer-top {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+      margin-bottom: 1rem;
+    }
+
+    .footer-logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .supported-browsers {
+      text-align: center;
+    }
+
+    .browser-icons {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .browser-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 8px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .browser-icon:hover {
+      transform: translateY(-2px);
     }
 
     .footer-links {
@@ -729,8 +1015,8 @@
     }
 
     .footer-bottom {
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 1rem; /* Reduced from 2rem */
+      border-top: none; /* Remove the border line */
       color: rgba(255, 255, 255, 0.6);
     }
 
@@ -746,6 +1032,10 @@
 
       .mobile-menu-toggle {
         display: flex;
+      }
+
+      .mobile-sidebar {
+        display: block; /* Show on mobile */
       }
 
       .hero {
@@ -809,18 +1099,6 @@
       }
     }
 
-    /* Scroll Progress Bar */
-    .scroll-progress {
-      position: fixed;
-      top: 0;
-      left: 0;
-      width: 0%;
-      height: 3px;
-      background: var(--gradient-primary);
-      z-index: 1001;
-      transition: width 0.1s ease;
-    }
-
     /* Loading Animation */
     .loading {
       position: fixed;
@@ -836,23 +1114,169 @@
       transition: opacity 0.5s ease;
     }
 
+    .loading-content {
+      width: 100%;
+      max-width: 1200px;
+      padding: 2rem;
+    }
+
+    /* Skeleton Header */
+    .skeleton-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 3rem;
+      padding: 1rem 0;
+    }
+
+    .skeleton-logo {
+      width: 120px;
+      height: 40px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 8px;
+    }
+
+    .skeleton-nav {
+      display: flex;
+      gap: 1.5rem;
+    }
+
+    .skeleton-nav-item {
+      width: 60px;
+      height: 20px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 4px;
+    }
+
+    /* Skeleton Hero */
+    .skeleton-hero {
+      text-align: center;
+      margin-bottom: 4rem;
+    }
+
+    .skeleton-hero-logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 20px;
+      margin: 0 auto 2rem;
+    }
+
+    .skeleton-hero-title {
+      width: 80%;
+      height: 48px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 8px;
+      margin: 0 auto 1rem;
+    }
+
+    .skeleton-hero-subtitle {
+      width: 60%;
+      height: 24px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 4px;
+      margin: 0 auto 2rem;
+    }
+
+    .skeleton-hero-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+    }
+
+    .skeleton-button {
+      width: 140px;
+      height: 44px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 22px;
+    }
+
+    /* Skeleton Content */
+    .skeleton-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+    }
+
+    .skeleton-card {
+      height: 200px;
+      background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+      background-size: 200% 100%;
+      animation: skeleton-loading 1.5s infinite;
+      border-radius: 12px;
+    }
+
+    @keyframes skeleton-loading {
+      0% {
+        background-position: 200% 0;
+      }
+      100% {
+        background-position: -200% 0;
+      }
+    }
+
     .loading.hidden {
       opacity: 0;
       pointer-events: none;
     }
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 4px solid var(--border);
-      border-top: 4px solid var(--primary);
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .logo-text {
+      font-family: 'Arial', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 600; /* Changed from 300 to 600 to match X */
+      color: var(--text-primary);
+      letter-spacing: 2px;
     }
 
-    @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+    .logo-x {
+      color: #dc2626;
+      font-weight: 600; /* Keep same weight as Mani */
+      animation: pulse 2s ease-in-out infinite;
+  font-size: 2.5rem;
+    }
+
+    .loading-slogan {
+      font-family: 'Georgia', serif;
+      font-size: 1rem;
+      color: var(--text-muted);
+      font-weight: 400;
+      font-style: normal;
+      letter-spacing: 0.5px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+      opacity: 0;
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes pulse {
+      0%, 100% {
+        opacity: 1;
+      }
+      50% {
+        opacity: 0.7;
+      }
     }
 
     .hero-logo-img {
@@ -861,28 +1285,255 @@
   margin: auto; /* center + spacing below */
   display: block;
 }
+
+/* Video Promo Section */
+.video-promo {
+  padding: 6rem 2rem;
+  background: var(--surface-elevated);
+}
+
+.video-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 3rem;
+  align-items: center;
+  max-width: 1000px;
+  margin: 0 auto;
+}
+
+.video-wrapper {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: var(--shadow-xl);
+  background: var(--surface);
+  aspect-ratio: 16/9;
+}
+
+.promo-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.promo-video:hover {
+  transform: scale(1.02);
+}
+
+.video-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.3); /* Lighter background */
+  backdrop-filter: blur(5px); /* Add backdrop blur when paused */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  z-index: 10;
+}
+
+.video-overlay:hover {
+  background: rgba(0, 0, 0, 0.4); /* Slightly darker on hover */
+  backdrop-filter: blur(8px); /* More blur on hover */
+}
+
+.video-overlay.hidden {
+  opacity: 0;
+  pointer-events: none;
+  z-index: -1; /* Move behind when hidden */
+}
+
+.play-button {
+  width: 80px;
+  height: 80px;
+  background: none; /* Remove the circular background */
+  border-radius: 0; /* Remove border radius */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+  box-shadow: none; /* Remove shadow */
+  z-index: 15;
+  color: white;
+  position: relative;
+}
+
+.play-button i {
+  color: white;
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+  /* Remove hover effects since no background */
+}
+
+/* If using text fallback, center it properly */
+.play-button:not(:has(i)) {
+  font-size: 2.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.video-overlay p {
+  font-size: 1.1rem;
+  font-weight: 500;
+  margin: 0;
+  z-index: 15; /* Ensure text is above overlay */
+}
+
+.video-info {
+  padding-top: 0.5rem;
+}
+
+.video-info h3 {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 0.75rem;
+}
+
+.video-info p {
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 1.5rem; /* Add margin back for the highlights */
+  font-size: 1rem;
+}
+
+.video-highlights {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  margin-top: 1.5rem;
+}
+
+.highlight-item {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+}
+
+.highlight-icon {
+  font-size: 1.2rem;
+  width: 24px;
+  text-align: center;
+  flex-shrink: 0;
+}
+
+/* Remove the video-features CSS classes since they're no longer needed */
+
+/* Responsive adjustments for video section */
+@media (max-width: 768px) {
+  .video-container {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    text-align: center;
+  }
+
+  .video-wrapper {
+    aspect-ratio: 16/9;
+  }
+
+  .video-info h3 {
+    font-size: 1.5rem;
+  }
+
+  .video-info p {
+    font-size: 1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .video-promo {
+    padding: 4rem 1rem;
+  }
+
+  .play-button {
+    width: 60px;
+    height: 60px;
+    font-size: 1.5rem;
+  }
+
+  .video-overlay p {
+    font-size: 1rem;
+  }
+}
   </style>
 </head>
 <body>
   <!-- Loading Screen -->
   <div class="loading" id="loading">
-    <div class="spinner"></div>
+    <div class="loading-content">
+      <!-- Skeleton Header -->
+      <div class="skeleton-header">
+        <div class="skeleton-logo"></div>
+        <div class="skeleton-nav">
+          <div class="skeleton-nav-item"></div>
+          <div class="skeleton-nav-item"></div>
+          <div class="skeleton-nav-item"></div>
+          <div class="skeleton-nav-item"></div>
+          <div class="skeleton-nav-item"></div>
+        </div>
+      </div>
+      
+      <!-- Skeleton Hero -->
+      <div class="skeleton-hero">
+        <div class="skeleton-hero-logo"></div>
+        <div class="skeleton-hero-title"></div>
+        <div class="skeleton-hero-subtitle"></div>
+        <div class="skeleton-hero-buttons">
+          <div class="skeleton-button"></div>
+          <div class="skeleton-button"></div>
+        </div>
+      </div>
+      
+      <!-- Skeleton Content -->
+      <div class="skeleton-content">
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+      </div>
+    </div>
   </div>
-
-  <!-- Scroll Progress Bar -->
-  <div class="scroll-progress" id="scrollProgress"></div>
 
   <!-- Header -->
   <header id="header">
     <div class="header-content">
-      <a href="#" class="logo">Manix</a>
+      <a href="#" class="logo">
+        <div class="logo-container">
+          <span class="logo-text">Mani<span style="color: #dc2626; font-weight: 600;">X</span></span>
+          <span class="logo-slogan">The X factor for your needs</span>
+        </div>
+      </a>
       <nav id="nav">
         <a href="#features">Features</a>
-        <a href="#why">Why Manix?</a>
+        <a href="#why">Why Mani<span style="color: #dc2626; font-weight: 600;">X</span>?</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
-        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener" class="cta-button">Install Now</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener" class="cta-button">
+          <img src="resources/web store.svg" alt="Chrome Web Store" style="width: 16px; height: 16px; margin-right: 8px; vertical-align: middle;" />
+          Install Now
+        </a>
       </nav>
       <div class="mobile-menu-toggle" id="mobileMenuToggle">
         <span></span>
@@ -892,6 +1543,21 @@
     </div>
   </header>
 
+  <!-- Mobile Sidebar -->
+  <div class="mobile-sidebar" id="mobileSidebar">
+    <nav class="mobile-sidebar-nav">
+      <a href="#features">Features</a>
+      <a href="#why">Why ManiX?</a>
+      <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
+      <a href="#contact">Contact</a>
+      <a href="privacy-policy.html">Privacy Policy</a>
+    </nav>
+  </div>
+
+  <!-- Mobile Overlay -->
+  <div class="mobile-overlay" id="mobileOverlay"></div>
+
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
@@ -899,7 +1565,11 @@
   <img src="resources/manix.png" alt="Manix Logo" class="hero-logo-img" />
 </div>
       <h1 class="reveal stagger-1">Transform Every New Tab Into Your Personal Command Center</h1>
-      <p class="reveal stagger-2">Manix instantly turns your Chrome new tab into a beautiful, customizable dashboard with smart tools, shortcuts, and privacy-first design.</p>
+      <p class="reveal stagger-2">Mani<span style="color: #dc2626; font-weight: 600;">X</span> instantly turns your Chrome new tab into a beautiful, customizable dashboard with smart tools, shortcuts, and privacy-first design.</p>
+      <div class="version-info reveal stagger-2">
+        <span class="version-badge">v1.0.2</span>
+        <span class="last-updated">Last updated: January 2025</span>
+      </div>
       <div class="hero-buttons reveal stagger-3">
         <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener" class="btn-primary">Add to Chrome - Free</a>
         <a href="#features" class="btn-secondary">Explore Features</a>
@@ -912,43 +1582,136 @@
     </div>
   </section>
 
+  <!-- Video Promo Section -->
+  <section class="video-promo" id="video-promo">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>See Mani<span style="color: #dc2626; font-weight: 600;">X</span> in Action</h2>
+        <p>Watch our promo video to see how Mani<span style="color: #dc2626; font-weight: 600;">X</span> transforms your new tab experience</p>
+      </div>
+      <div class="video-container reveal stagger-1">
+        <div class="video-wrapper">
+          <video 
+            id="promoVideo" 
+            controls 
+            poster="resources/manix.png"
+            preload="metadata"
+            class="promo-video"
+          >
+            <source src="resources/manix.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+          <div class="video-overlay" id="videoOverlay">
+            <div class="play-button" id="playButton">
+              <i class="fas fa-play"></i>
+            </div>
+            <p>Click to watch promo</p>
+          </div>
+        </div>
+        <div class="video-info">
+          <h3>Feature Showcase</h3>
+          <p>See how easy it is to transform your new tab into a productivity powerhouse.</p>
+          
+          <div class="video-highlights">
+            <div class="highlight-item">
+              <span class="highlight-icon">🎯</span>
+              <span>Quick setup in under 30 seconds</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">⚡</span>
+              <span>Lightning-fast performance</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">🔒</span>
+              <span>100% privacy-focused</span>
+            </div>
+            <div class="highlight-item">
+              <span class="highlight-icon">🎨</span>
+              <span>Beautiful, customizable interface</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Features Section -->
   <section class="features" id="features">
     <div class="container">
       <div class="section-header reveal">
         <h2>Powerful Features for Power Users</h2>
-        <p>Everything you need to supercharge your browsing experience, built with privacy and performance in mind.</p>
+        <p>Everything you need to supercharge your browsing experience, built with Mani<span style="color: #dc2626; font-weight: 600;">X</span> privacy and performance in mind. No login required, complete offline functionality.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card reveal stagger-1">
-          <div class="feature-icon">🚀</div>
-          <h3>Lightning Fast Shortcuts</h3>
-          <p>Access your favorite websites and Google Apps instantly with customizable shortcuts. No more bookmarks hunting or typing long URLs.</p>
+          <h3>
+            <span class="feature-icon">🔍</span>
+            Smart Search & Navigation
+          </h3>
+          <p>Powerful search bar with suggestions and quick access to websites. Navigate between different sections like AI Tools, To-Do, Bookmarks, and more.</p>
         </div>
         <div class="feature-card reveal stagger-2">
-          <div class="feature-icon">🎤</div>
-          <h3>Smart Search & Voice</h3>
-          <p>Find anything with intelligent search powered by Google. Voice commands let you open tabs and search hands-free.</p>
+          <h3>
+            <span class="feature-icon">🖼️</span>
+            Dynamic Wallpapers
+          </h3>
+          <p>Choose from static backgrounds or live wallpapers. Upload your own images, auto-change wallpapers, and control background blur effects.</p>
         </div>
         <div class="feature-card reveal stagger-3">
-          <div class="feature-icon">⏰</div>
-          <h3>Live Clock & Calendar</h3>
-          <p>Stay on top of your schedule with a beautiful real-time clock, date display, and quick calendar access.</p>
+          <h3>
+            <span class="feature-icon">🤖</span>
+            AI Tools Integration
+          </h3>
+          <p>Quick access to leading AI tools and services. Refresh and update tools from source, all organized in a clean grid layout.</p>
         </div>
         <div class="feature-card reveal stagger-4">
-          <div class="feature-icon">✅</div>
-          <h3>Integrated Productivity</h3>
-          <p>Manage tasks, organize bookmarks, and track your daily goals without leaving your new tab page.</p>
+          <h3>
+            <span class="feature-icon">✅</span>
+            Task Management
+          </h3>
+          <p>Built-in to-do list with add, edit, complete, and delete functionality. Track your daily tasks and view completed task history.</p>
         </div>
         <div class="feature-card reveal stagger-5">
-          <div class="feature-icon">🔒</div>
-          <h3>Privacy by Design</h3>
-          <p>Zero data collection, no tracking, no analytics. Your browsing habits stay completely private and secure.</p>
+          <h3>
+            <span class="feature-icon">🔖</span>
+            Chrome Bookmarks
+          </h3>
+          <p>Seamless integration with your Chrome bookmarks. Access all your saved bookmarks directly from the new tab page.</p>
         </div>
         <div class="feature-card reveal stagger-6">
-          <div class="feature-icon">🎨</div>
-          <h3>Beautiful Customization</h3>
-          <p>Choose from stunning wallpapers and themes. Customize layouts, colors, and widgets to match your style.</p>
+          <h3>
+            <span class="feature-icon">⚡</span>
+            Custom Shortcuts
+          </h3>
+          <p>Create and manage custom shortcuts to your favorite websites. Add, edit, and organize shortcuts for quick access.</p>
+        </div>
+        <div class="feature-card reveal stagger-7">
+          <h3>
+            <span class="feature-icon">📱</span>
+            Google Apps Hub
+          </h3>
+          <p>Quick access to essential Google services and apps. Refresh and update apps from source for the latest tools.</p>
+        </div>
+        <div class="feature-card reveal stagger-8">
+          <h3>
+            <span class="feature-icon">🌤️</span>
+            Weather Integration
+          </h3>
+          <p>Real-time weather information with location support. Auto-detect location or manually enter city names for weather updates.</p>
+        </div>
+        <div class="feature-card reveal stagger-9">
+          <h3>
+            <span class="feature-icon">⚙️</span>
+            Advanced Settings
+          </h3>
+          <p>Comprehensive customization options including time format, greeting display, search bar visibility, and navigation preferences.</p>
+        </div>
+        <div class="feature-card reveal stagger-10">
+          <h3>
+            <span class="feature-icon">💾</span>
+            Backup & Restore
+          </h3>
+          <p>Export and import all your settings, wallpapers, shortcuts, and todo items. Complete data portability and backup.</p>
         </div>
       </div>
     </div>
@@ -958,14 +1721,14 @@
   <section class="why-section" id="why">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Why Choose Manix?</h2>
-        <p>Join thousands of users who've transformed their browsing experience with Manix.</p>
+        <h2>Why Choose Mani<span style="color: #dc2626; font-weight: 600;">X</span>?</h2>
+        <p>Join thousands of users who've transformed their browsing experience with Mani<span style="color: #dc2626; font-weight: 600;">X</span>. No accounts, no data collection, just pure productivity.</p>
       </div>
       <div class="why-grid">
         <div class="why-item">
           <div class="why-content reveal-left">
             <h3>Boost Your Productivity</h3>
-            <p>Transform dead time into productive moments. With instant access to your tools, shortcuts, and tasks, you'll accomplish more in less time. Studies show users save 2+ hours per week with organized new tab workflows.</p>
+            <p>Transform dead time into productive moments. With instant access to your tools, shortcuts, and tasks, you'll accomplish more in less time. Access AI tools, manage bookmarks, and track todos all from one place.</p>
           </div>
           <div class="why-image reveal-right">
             <img src="https://images.unsplash.com/photo-1551434678-e076c223a692?auto=format&fit=crop&w=500&q=80" alt="Productivity Dashboard">
@@ -974,7 +1737,7 @@
         <div class="why-item">
           <div class="why-content reveal-right">
             <h3>Personalize Your Experience</h3>
-            <p>Make Chrome truly yours with beautiful themes, custom layouts, and personalized shortcuts. Every element is designed to adapt to your workflow and aesthetic preferences.</p>
+            <p>Make Chrome truly yours with beautiful themes, custom layouts, and personalized shortcuts. Choose from static or live wallpapers, control background blur, and customize every aspect of your new tab experience.</p>
           </div>
           <div class="why-image reveal-left">
             <img src="https://images.unsplash.com/photo-1558655146-d09347e92766?auto=format&fit=crop&w=500&q=80" alt="Customization Options">
@@ -983,7 +1746,7 @@
         <div class="why-item">
           <div class="why-content reveal-left">
             <h3>Privacy You Can Trust</h3>
-            <p>Unlike other extensions, Manix operates entirely offline. No data collection, no tracking pixels, no analytics. Your browsing habits remain completely private and secure.</p>
+            <p>Unlike other extensions, Mani<span style="color: #dc2626; font-weight: 600;">X</span> operates entirely offline. No data collection, no tracking pixels, no analytics. Your browsing habits remain completely private and secure. All data is stored locally on your device.</p>
           </div>
           <div class="why-image reveal-right">
             <img src="https://images.unsplash.com/photo-1563013544-824ae1b704d3?auto=format&fit=crop&w=500&q=80" alt="Privacy and Security">
@@ -992,7 +1755,7 @@
         <div class="why-item">
           <div class="why-content reveal-right">
             <h3>Instant Setup & Use</h3>
-            <p>Get started in under 30 seconds. One-click installation from Chrome Web Store, and you're ready to go. No accounts, no configuration complexity, no learning curve.</p>
+            <p>Get started in under 30 seconds. One-click installation from Chrome Web Store, and you're ready to go. No accounts, no configuration complexity, no learning curve. Just install and start customizing.</p>
           </div>
           <div class="why-image reveal-left">
             <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=500&q=80" alt="Easy Setup">
@@ -1006,7 +1769,7 @@
 <section class="testimonials" id="testimonials">
   <div class="container">
     <div class="section-header reveal">
-      <h2>What Users Say About Manix</h2>
+      <h2>What Users Say About Mani<span style="color: #dc2626; font-weight: 600;">X</span></h2>
       <p>Real feedback from real users who've transformed their browsing experience.</p>
     </div>
     <div class="testimonials-slider reveal" id="testimonials-slider">
@@ -1092,10 +1855,19 @@
     <div class="container">
       <div class="section-header reveal">
         <h2>Frequently Asked Questions</h2>
-        <p>Everything you need to know about Manix.</p>
+        <p>Everything you need to know about Mani<span style="color: #dc2626; font-weight: 600;">X</span>.</p>
       </div>
       <div class="faq-list">
         <div class="faq-item reveal stagger-1">
+          <div class="faq-question">
+            <span>How do I install Manix?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Simply visit the Chrome Web Store and click "Add to Chrome". The extension will install automatically and you'll see the beautiful Manix interface the next time you open a new tab.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-2">
           <div class="faq-question">
             <span>Is Manix completely free?</span>
             <span class="faq-icon">+</span>
@@ -1104,7 +1876,7 @@
             Yes! Manix is completely free with no hidden costs, premium tiers, or subscription fees. All features are available to everyone.
           </div>
         </div>
-        <div class="faq-item reveal stagger-2">
+        <div class="faq-item reveal stagger-3">
           <div class="faq-question">
             <span>Does Manix collect my data?</span>
             <span class="faq-icon">+</span>
@@ -1113,16 +1885,16 @@
             Absolutely not. Manix operates entirely offline and doesn't collect, store, or transmit any personal data. Your privacy is our top priority.
           </div>
         </div>
-        <div class="faq-item reveal stagger-3">
+        <div class="faq-item reveal stagger-4">
           <div class="faq-question">
             <span>How do I customize my shortcuts?</span>
             <span class="faq-icon">+</span>
           </div>
           <div class="faq-answer">
-            Simply click the settings icon on your new tab page. You can add, edit, or remove shortcuts with just a few clicks. Drag and drop to reorder them.
+            Click the settings icon on your new tab page. You can add, edit, or remove shortcuts with just a few clicks. Drag and drop to reorder them.
           </div>
         </div>
-        <div class="faq-item reveal stagger-4">
+        <div class="faq-item reveal stagger-5">
           <div class="faq-question">
             <span>Will Manix slow down my browser?</span>
             <span class="faq-icon">+</span>
@@ -1131,13 +1903,50 @@
             No! Manix is built for performance with minimal resource usage. It's optimized to load instantly and won't affect your browser's speed.
           </div>
         </div>
-        <div class="faq-item reveal stagger-5">
+        <div class="faq-item reveal stagger-6">
           <div class="faq-question">
             <span>Can I sync my settings across devices?</span>
             <span class="faq-icon">+</span>
           </div>
           <div class="faq-answer">
-            Yes! Your Manix settings automatically sync across all your Chrome browsers when you're signed into your Google account.
+            Yes! You can export your settings from one device and import them on another. Use the Export/Import feature in the settings panel to create a backup file (.json) that you can transfer and use on other systems. No Google account login required.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-7">
+          <div class="faq-question">
+            <span>How do I change wallpapers?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Click the settings icon (gear icon) on your new tab page, then go to the Background Image section. You can choose from static wallpapers, live wallpapers, or upload your own images. You can also enable auto wallpaper change at different intervals.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-8">
+          <div class="faq-question">
+            <span>What browsers support Manix?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Manix is currently available for Google Chrome and other Chromium-based browsers like Microsoft Edge, Brave, and Opera. It's designed specifically for Chrome's extension ecosystem.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-9">
+          <div class="faq-question">
+            <span>How do I access the settings panel?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Click the gear icon (⚙️) in the top-right corner of your new tab page to open the settings sidebar. Here you can customize wallpapers, set your name, configure weather, adjust display preferences, and manage backups.
+          </div>
+        </div>
+
+        <div class="faq-item reveal stagger-10">
+          <div class="faq-question">
+            <span>How does the weather feature work?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Enter your city name in the Location & Weather settings. ManiX will fetch real-time weather data and display it alongside the date. You can also use auto-detect location or manually refresh the weather data.
           </div>
         </div>
       </div>
@@ -1149,24 +1958,32 @@
     <div class="container">
       <div class="contact-content reveal">
         <h2>Get in Touch</h2>
-        <p>Have questions, feedback, or suggestions? We'd love to hear from you!</p>
-        <div class="contact-form">
-          <form onsubmit="handleFormSubmit(event)">
-            <div class="form-group">
-              <label for="email">Your Email</label>
-              <input type="email" id="email" name="email" required>
-            </div>
-            <div class="form-group">
-              <label for="message">Message</label>
-              <textarea id="message" name="message" placeholder="Tell us what you think about Manix or how we can improve..." required></textarea>
-            </div>
-            <button type="submit" class="btn-primary">Send Message</button>
-          </form>
+        <p>Have questions or feedback? We'd love to hear from you.</p>
+        
+        <div class="contact-card">
+          <div class="contact-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="contact-details">
+            <h3>Email Us</h3>
+            <p>Send us a message and we'll get back to you within 24 hours</p>
+            <a href="mailto:contact@manishsharma18.in" class="contact-btn">
+              <i class="fas fa-paper-plane"></i>
+              contact@manishsharma18.in
+            </a>
+          </div>
         </div>
-        <p style="margin-top: 2rem;">
-          Made with ❤️ by <strong>Manish Sharma</strong><br>
-          <a href="mailto:contact@manishsharma18.in" style="color: var(--primary); font-weight: 600;">contact@manishsharma18.in</a>
-        </p>
+        
+        <div class="contact-links">
+          <a href="https://instagram.com/me.manish18" target="_blank" class="social-link">
+            <i class="fab fa-instagram"></i>
+            <span>Follow on Instagram</span>
+          </a>
+          <a href="https://manishsharma18.in" target="_blank" class="social-link">
+            <i class="fas fa-globe"></i>
+            <span>Visit Developer Website</span>
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -1174,16 +1991,34 @@
   <!-- Footer -->
   <footer>
     <div class="footer-content">
-      <div class="footer-links">
-        <a href="#features">Features</a>
-        <a href="#why">Why Manix</a>
-        <a href="#testimonials">Testimonials</a>
-        <a href="#faq">FAQ</a>
-        <a href="#contact">Contact</a>
-        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener">Chrome Web Store</a>
+      <!-- Logo and Browser Support Section -->
+      <div class="footer-top">
+        <div class="footer-logo">
+          <img src="resources/manix.png" alt="Manix Logo" style="width: 60px; height: auto; filter: brightness(0) invert(1);" />
+        </div>
+        <div class="supported-browsers">
+          <h4 style="color: rgba(255, 255, 255, 0.8); margin-bottom: 1rem; font-size: 0.9rem; font-weight: 500;">Supported Browsers</h4>
+          <div class="browser-icons">
+            <div class="browser-icon" title="Google Chrome">
+              <img src="resources/chrome.png" alt="Chrome" style="width: 32px; height: 32px;" />
+            </div>
+            <div class="browser-icon" title="Microsoft Edge">
+              <img src="resources/edge.png" alt="Edge" style="width: 32px; height: 32px;" />
+            </div>
+            <div class="browser-icon" title="Brave Browser">
+              <img src="resources/brave.png" alt="Brave" style="width: 32px; height: 32px;" />
+            </div>
+            <div class="browser-icon" title="Opera Browser">
+              <img src="resources/opera.png" alt="Opera" style="width: 32px; height: 32px;" />
+            </div>
+          </div>
+        </div>
       </div>
+      
       <div class="footer-bottom">
-        <p>&copy; 2025 Manix Chrome Extension. All rights reserved. | Designed with care by Manish Sharma</p>
+        <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); margin: 0.5rem 0;">&copy; 2024-2025 Mani<span style="color: #dc2626; font-weight: 600;">X</span> Chrome Extension v1.0.2 | Last updated: January 2025</p>
+        <hr style="margin: 0.3rem auto; width: 100%; border: none; border-top: 1px solid rgba(255, 255, 255, 0.2);">
+        <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); margin: 0.5rem 0;">All rights reserved. | Developed with ❤️ in India by <a href="https://manishsharma18.in" target="_blank" style="color: #dc2626; text-decoration: none; font-size: 0.75rem;">Manish Sharma</a></p>
       </div>
     </div>
   </footer>
@@ -1195,15 +2030,6 @@
       setTimeout(() => {
         loading.classList.add('hidden');
       }, 1000);
-    });
-
-    // Scroll Progress Bar
-    window.addEventListener('scroll', () => {
-      const scrollProgress = document.getElementById('scrollProgress');
-      const scrollTop = window.pageYOffset;
-      const docHeight = document.body.scrollHeight - window.innerHeight;
-      const scrollPercent = (scrollTop / docHeight) * 100;
-      scrollProgress.style.width = scrollPercent + '%';
     });
 
     // Header Scroll Effect
@@ -1311,13 +2137,36 @@
       });
     });
 
-    // Mobile Menu Toggle (for future implementation)
+    // Mobile Menu Toggle
     const mobileMenuToggle = document.getElementById('mobileMenuToggle');
-    const nav = document.getElementById('nav');
+    const mobileSidebar = document.getElementById('mobileSidebar');
+    const mobileOverlay = document.getElementById('mobileOverlay');
+    const body = document.body;
     
-    mobileMenuToggle.addEventListener('click', () => {
-      nav.classList.toggle('active');
+    function toggleMobileMenu() {
       mobileMenuToggle.classList.toggle('active');
+      mobileSidebar.classList.toggle('active');
+      mobileOverlay.classList.toggle('active');
+      body.style.overflow = mobileSidebar.classList.contains('active') ? 'hidden' : '';
+    }
+    
+    mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+    mobileOverlay.addEventListener('click', toggleMobileMenu);
+    
+    // Close mobile menu when clicking on a link
+    document.querySelectorAll('.mobile-sidebar-nav a').forEach(link => {
+      link.addEventListener('click', () => {
+        if (mobileSidebar.classList.contains('active')) {
+          toggleMobileMenu();
+        }
+      });
+    });
+    
+    // Close mobile menu on window resize
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 768 && mobileSidebar.classList.contains('active')) {
+        toggleMobileMenu();
+      }
     });
 
     // Parallax Effect for Hero Section
@@ -1341,6 +2190,119 @@
         card.style.transform = 'translateY(0) scale(1)';
       });
     });
+
+    // Video Player Functionality with fallback for missing icons
+    const promoVideo = document.getElementById('promoVideo');
+    const videoOverlay = document.getElementById('videoOverlay');
+    const playButton = document.getElementById('playButton');
+
+    if (promoVideo && videoOverlay && playButton) {
+      // Check if Font Awesome is loaded, if not use text fallback
+      const playIcon = playButton.querySelector('i');
+      if (playIcon && !playIcon.offsetWidth) {
+        // Font Awesome not loaded, use text fallback
+        playButton.innerHTML = '▶';
+        playButton.style.fontSize = '2.5rem';
+        playButton.style.fontWeight = 'bold';
+      }
+
+      // Auto-play video when section becomes visible
+      const videoSection = document.getElementById('video-promo');
+      const videoObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !promoVideo.played.length) {
+            // Only auto-play if video hasn't been played before
+            promoVideo.play().catch(error => {
+              console.log('Auto-play prevented:', error);
+            });
+          }
+          
+          // Add typing effect to video description when section is visible
+          if (entry.isIntersecting) {
+            const videoDescription = document.querySelector('.video-info p');
+            if (videoDescription && !videoDescription.classList.contains('typed')) {
+              videoDescription.classList.add('typed');
+              const originalText = videoDescription.textContent;
+              videoDescription.textContent = '';
+              typeWriter(videoDescription, originalText, 30);
+              
+              // Add typing effect to all 4 highlight items (including icons)
+              const highlightItems = document.querySelectorAll('.highlight-item');
+              const totalDescriptionTime = originalText.length * 30; // Calculate time for main description
+              
+              highlightItems.forEach((item, index) => {
+                if (!item.classList.contains('typed')) {
+                  item.classList.add('typed');
+                  const icon = item.querySelector('.highlight-icon');
+                  const text = item.querySelector('span:last-child');
+                  const originalIcon = icon.textContent;
+                  const originalText = text.textContent;
+                  
+                  // Hide both icon and text initially
+                  icon.textContent = '';
+                  text.textContent = '';
+                  
+                  setTimeout(() => {
+                    // Type the icon first, then the text
+                    typeWriter(icon, originalIcon, 25);
+                    setTimeout(() => {
+                      typeWriter(text, originalText, 25);
+                    }, originalIcon.length * 25 + 100); // Wait for icon to finish + small delay
+                  }, totalDescriptionTime + (index * 400)); // Wait for main description + stagger each item
+                }
+              });
+            }
+          }
+        });
+      }, {
+        threshold: 0.5, // Trigger when 50% of section is visible
+        rootMargin: '0px 0px -100px 0px'
+      });
+
+      if (videoSection) {
+        videoObserver.observe(videoSection);
+      }
+
+      // Hide overlay when video starts playing
+      promoVideo.addEventListener('play', () => {
+        videoOverlay.classList.add('hidden');
+      });
+
+      // Show overlay when video ends
+      promoVideo.addEventListener('ended', () => {
+        videoOverlay.classList.remove('hidden');
+      });
+
+      // Show overlay when video is paused
+      promoVideo.addEventListener('pause', () => {
+        videoOverlay.classList.remove('hidden');
+      });
+
+      // Click overlay to play video
+      videoOverlay.addEventListener('click', () => {
+        promoVideo.play();
+      });
+
+      // Click play button to play video
+      playButton.addEventListener('click', () => {
+        promoVideo.play();
+      });
+
+      // Keyboard controls
+      promoVideo.addEventListener('keydown', (e) => {
+        if (e.code === 'Space') {
+          e.preventDefault();
+          if (promoVideo.paused) {
+            promoVideo.play();
+          } else {
+            promoVideo.pause();
+          }
+        }
+      });
+
+      // Make video focusable for keyboard navigation
+      promoVideo.setAttribute('tabindex', '0');
+    }
 
     // Typing effect for hero title (optional enhancement)
     function typeWriter(element, text, speed = 50) {
@@ -1366,6 +2328,71 @@
         typeWriter(heroTitle, originalText, 30);
       }
     }, 1500);
+
+    // Hide all selections, touch highlights, and icon backgrounds
+    document.addEventListener('DOMContentLoaded', function() {
+      // Remove text selection
+      document.body.style.userSelect = 'none';
+      document.body.style.webkitUserSelect = 'none';
+      document.body.style.mozUserSelect = 'none';
+      document.body.style.msUserSelect = 'none';
+      
+      // Remove touch highlights
+      document.body.style.webkitTapHighlightColor = 'transparent';
+      document.body.style.tapHighlightColor = 'transparent';
+      
+      // Remove focus outlines for non-interactive elements
+      const nonInteractiveElements = document.querySelectorAll('h1, h2, h3, h4, h5, h6, p, span, div:not([tabindex]), img:not([tabindex])');
+      nonInteractiveElements.forEach(element => {
+        element.style.outline = 'none';
+        element.setAttribute('tabindex', '-1');
+      });
+      
+      // Remove selection from specific elements
+      const noSelectElements = document.querySelectorAll('.hero, .feature-card, .testimonial, .faq-item, .footer');
+      noSelectElements.forEach(element => {
+        element.style.userSelect = 'none';
+        element.style.webkitUserSelect = 'none';
+        element.style.mozUserSelect = 'none';
+        element.style.msUserSelect = 'none';
+      });
+      
+      // Remove touch feedback from buttons and links
+      const interactiveElements = document.querySelectorAll('a, button, .btn-primary, .btn-secondary, .cta-button');
+      interactiveElements.forEach(element => {
+        element.style.webkitTapHighlightColor = 'transparent';
+        element.style.tapHighlightColor = 'transparent';
+        element.style.webkitTouchCallout = 'none';
+        element.style.webkitUserSelect = 'none';
+      });
+      
+      // Prevent context menu on right click
+      document.addEventListener('contextmenu', function(e) {
+        e.preventDefault();
+      });
+      
+      // Remove selection on double click
+      document.addEventListener('dblclick', function(e) {
+        e.preventDefault();
+      });
+      
+      // Remove selection on long press (mobile)
+      let pressTimer;
+      document.addEventListener('touchstart', function(e) {
+        pressTimer = setTimeout(function() {
+          e.preventDefault();
+        }, 500);
+      });
+      
+      document.addEventListener('touchend', function() {
+        clearTimeout(pressTimer);
+      });
+      
+      // Remove selection on drag
+      document.addEventListener('dragstart', function(e) {
+        e.preventDefault();
+      });
+    });
   </script>
 </body>
 </html>
