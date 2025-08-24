@@ -1,0 +1,323 @@
+{
+    "aiTools": [
+        {
+            "name": "ChatGPT",
+            "url": "https://chat.openai.com",
+            "icon": "https://www.google.com/s2/favicons?domain=chat.openai.com&sz=128",
+            "alt": "ChatGPT",
+            "description": "AI-powered chatbot by OpenAI",
+            "category": "chat",
+            "featured": true
+        },
+        {
+            "name": "Gemini",
+            "url": "https://bard.google.com",
+            "icon": "https://www.google.com/s2/favicons?domain=bard.google.com&sz=128",
+            "alt": "Gemini",
+            "description": "Google's AI assistant",
+            "category": "chat",
+            "featured": true
+        },
+        {
+            "name": "Gemini Advanced",
+            "url": "https://gemini.google.com/app",
+            "icon": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128",
+            "alt": "Gemini Advanced",
+            "description": "Advanced AI model by Google",
+            "category": "chat",
+            "featured": true
+        },
+        {
+            "name": "Claude",
+            "url": "https://claude.ai",
+            "icon": "https://www.google.com/s2/favicons?domain=claude.ai&sz=128",
+            "alt": "Claude",
+            "description": "AI assistant by Anthropic",
+            "category": "chat",
+            "featured": true
+        },
+        {
+            "name": "Copilot",
+            "url": "https://copilot.microsoft.com",
+            "icon": "https://www.google.com/s2/favicons?domain=copilot.microsoft.com&sz=128",
+            "alt": "Copilot",
+            "description": "Microsoft's AI assistant",
+            "category": "chat",
+            "featured": true
+        },
+        {
+            "name": "Perplexity",
+            "url": "https://www.perplexity.ai",
+            "icon": "https://www.google.com/s2/favicons?domain=www.perplexity.ai&sz=128",
+            "alt": "Perplexity",
+            "description": "AI-powered search engine",
+            "category": "search",
+            "featured": true
+        },
+        {
+            "name": "Poe",
+            "url": "https://poe.com",
+            "icon": "https://www.google.com/s2/favicons?domain=poe.com&sz=128",
+            "alt": "Poe",
+            "description": "AI chat platform",
+            "category": "chat",
+            "featured": false
+        },
+        {
+            "name": "You.com",
+            "url": "https://you.com",
+            "icon": "https://www.google.com/s2/favicons?domain=you.com&sz=128",
+            "alt": "You.com",
+            "description": "AI-powered search and chat",
+            "category": "search",
+            "featured": false
+        },
+        {
+            "name": "Phind",
+            "url": "https://phind.com",
+            "icon": "https://www.google.com/s2/favicons?domain=phind.com&sz=128",
+            "alt": "Phind",
+            "description": "AI search engine for developers",
+            "category": "development",
+            "featured": false
+        },
+        {
+            "name": "Mistral",
+            "url": "https://chat.mistral.ai",
+            "icon": "https://www.google.com/s2/favicons?domain=chat.mistral.ai&sz=128",
+            "alt": "Mistral",
+            "description": "Open-source AI chat",
+            "category": "chat",
+            "featured": false
+        },
+        {
+            "name": "HuggingChat",
+            "url": "https://huggingface.co/chat",
+            "icon": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=128",
+            "alt": "HuggingChat",
+            "description": "Open-source AI chat models",
+            "category": "chat",
+            "featured": false
+        }
+    ],
+    "googleApps": [
+        {
+            "name": "Gmail",
+            "url": "https://mail.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/gmail_48dp.png",
+            "alt": "Gmail",
+            "description": "Email service",
+            "category": "communication",
+            "featured": true
+        },
+        {
+            "name": "Drive",
+            "url": "https://drive.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/drive_48dp.png",
+            "alt": "Drive",
+            "description": "Cloud storage",
+            "category": "storage",
+            "featured": true
+        },
+        {
+            "name": "Calendar",
+            "url": "https://calendar.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/calendar_48dp.png",
+            "alt": "Calendar",
+            "description": "Calendar and scheduling",
+            "category": "productivity",
+            "featured": true
+        },
+        {
+            "name": "Docs",
+            "url": "https://docs.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/docs_48dp.png",
+            "alt": "Docs",
+            "description": "Word processor",
+            "category": "productivity",
+            "featured": true
+        },
+        {
+            "name": "Sheets",
+            "url": "https://sheets.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/sheets_48dp.png",
+            "alt": "Sheets",
+            "description": "Spreadsheet editor",
+            "category": "productivity",
+            "featured": true
+        },
+        {
+            "name": "Slides",
+            "url": "https://slides.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/slides_48dp.png",
+            "alt": "Slides",
+            "description": "Presentation editor",
+            "category": "productivity",
+            "featured": true
+        },
+        {
+            "name": "Photos",
+            "url": "https://photos.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/photos_48dp.png",
+            "alt": "Photos",
+            "description": "Photo storage and editing",
+            "category": "media",
+            "featured": true
+        },
+        {
+            "name": "Meet",
+            "url": "https://meet.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/meet_48dp.png",
+            "alt": "Meet",
+            "description": "Video conferencing",
+            "category": "communication",
+            "featured": true
+        },
+        {
+            "name": "Keep",
+            "url": "https://keep.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/keep_48dp.png",
+            "alt": "Keep",
+            "description": "Note-taking app",
+            "category": "productivity",
+            "featured": true
+        },
+        {
+            "name": "Translate",
+            "url": "https://translate.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/translate_48dp.png",
+            "alt": "Translate",
+            "description": "Language translation",
+            "category": "tools",
+            "featured": true
+        },
+        {
+            "name": "Contacts",
+            "url": "https://contacts.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/contacts_48dp.png",
+            "alt": "Contacts",
+            "description": "Contact management",
+            "category": "communication",
+            "featured": false
+        },
+        {
+            "name": "Forms",
+            "url": "https://forms.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/forms_48dp.png",
+            "alt": "Forms",
+            "description": "Form creation",
+            "category": "productivity",
+            "featured": false
+        },
+        {
+            "name": "YouTube",
+            "url": "https://www.youtube.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/youtube_48dp.png",
+            "alt": "YouTube",
+            "description": "Video platform",
+            "category": "media",
+            "featured": true
+        },
+        {
+            "name": "News",
+            "url": "https://news.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/news_48dp.png",
+            "alt": "News",
+            "description": "News aggregation",
+            "category": "media",
+            "featured": false
+        },
+        {
+            "name": "Maps",
+            "url": "https://maps.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/maps_48dp.png",
+            "alt": "Maps",
+            "description": "Maps and navigation",
+            "category": "tools",
+            "featured": true
+        },
+        {
+            "name": "Play Store",
+            "url": "https://play.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/play_48dp.png",
+            "alt": "Play Store",
+            "description": "App store",
+            "category": "tools",
+            "featured": false
+        },
+        {
+            "name": "Ads",
+            "url": "https://ads.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/ads_48dp.png",
+            "alt": "Ads",
+            "description": "Advertising platform",
+            "category": "business",
+            "featured": false
+        },
+        {
+            "name": "Finance",
+            "url": "https://finance.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/finance_48dp.png",
+            "alt": "Finance",
+            "description": "Financial information",
+            "category": "business",
+            "featured": false
+        },
+        {
+            "name": "Shopping",
+            "url": "https://shopping.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/shopping_48dp.png",
+            "alt": "Shopping",
+            "description": "Shopping search",
+            "category": "shopping",
+            "featured": false
+        },
+        {
+            "name": "Earth",
+            "url": "https://earth.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/earth_48dp.png",
+            "alt": "Earth",
+            "description": "3D Earth exploration",
+            "category": "tools",
+            "featured": false
+        },
+        {
+            "name": "Classroom",
+            "url": "https://classroom.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/classroom_48dp.png",
+            "alt": "Classroom",
+            "description": "Educational platform",
+            "category": "education",
+            "featured": false
+        },
+        {
+            "name": "Duo",
+            "url": "https://duo.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/duo_48dp.png",
+            "alt": "Duo",
+            "description": "Video calling",
+            "category": "communication",
+            "featured": false
+        },
+        {
+            "name": "Jamboard",
+            "url": "https://jamboard.google.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/jamboard_48dp.png",
+            "alt": "Jamboard",
+            "description": "Digital whiteboard",
+            "category": "productivity",
+            "featured": false
+        },
+        {
+            "name": "Blogger",
+            "url": "https://blogger.com",
+            "icon": "https://www.gstatic.com/images/branding/product/1x/blogger_48dp.png",
+            "alt": "Blogger",
+            "description": "Blogging platform",
+            "category": "media",
+            "featured": false
+        }
+    ],
+    "lastUpdated": "2024-01-01T00:00:00Z",
+    "version": "1.0.0"
+}
