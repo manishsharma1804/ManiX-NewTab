@@ -123,12 +123,6 @@
             "alt": "Keep"
         },
         {
-            "name": "Translate",
-            "url": "https://translate.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/translate_48dp.png",
-            "alt": "Translate"
-        },
-        {
             "name": "Contacts",
             "url": "https://contacts.google.com",
             "icon": "https://www.gstatic.com/images/branding/product/1x/contacts_48dp.png",
@@ -145,12 +139,6 @@
             "url": "https://www.youtube.com",
             "icon": "https://www.gstatic.com/images/branding/product/1x/youtube_48dp.png",
             "alt": "YouTube"
-        },
-        {
-            "name": "News",
-            "url": "https://news.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/news_48dp.png",
-            "alt": "News"
         },
         {
             "name": "Maps",
@@ -171,46 +159,10 @@
             "alt": "Ads"
         },
         {
-            "name": "Finance",
-            "url": "https://finance.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/finance_48dp.png",
-            "alt": "Finance"
-        },
-        {
-            "name": "Shopping",
-            "url": "https://shopping.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/shopping_48dp.png",
-            "alt": "Shopping"
-        },
-        {
-            "name": "Earth",
-            "url": "https://earth.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/earth_48dp.png",
-            "alt": "Earth"
-        },
-        {
-            "name": "Classroom",
-            "url": "https://classroom.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/classroom_48dp.png",
-            "alt": "Classroom"
-        },
-        {
             "name": "Duo",
             "url": "https://duo.google.com",
             "icon": "https://www.gstatic.com/images/branding/product/1x/duo_48dp.png",
             "alt": "Duo"
-        },
-        {
-            "name": "Jamboard",
-            "url": "https://jamboard.google.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/jamboard_48dp.png",
-            "alt": "Jamboard"
-        },
-        {
-            "name": "Blogger",
-            "url": "https://blogger.com",
-            "icon": "https://www.gstatic.com/images/branding/product/1x/blogger_48dp.png",
-            "alt": "Blogger"
         }
     ],
     "lastUpdated": "2024-01-01T00:00:00Z",
