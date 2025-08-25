@@ -2,10 +2,10 @@
   "notifications": [
     {
       "id": "1",
-      "title": "New Feature: Custom Time Intervals",
+      "title": "manish here",
       "message": "You can now set custom time intervals for auto wallpaper changes! Choose any duration from 1 minute to 24 hours.",
-      "date": "2025-01-15",
-      "type": "success",
+      "date": "2025-08-25",
+      "type": "alert",
       "link": "https://github.com/manishsharma1804/ManiX-NewTab"
     },
     {
