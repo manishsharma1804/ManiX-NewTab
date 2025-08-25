@@ -6,6 +6,13 @@
       "message": "We're glad to have you here! Explore the features and customize your new tab experience.",
       "date": "2025-08-25",
       "type": "success"
+    },
+    {
+      "id": "2",
+      "title": "Welcomewefwef to ManiX!",
+      "message": "We're glad to efwefwefwehave you here! Explore the features and customize your new tab experience.",
+      "date": "2025-08-26",
+      "type": "success"
     }
   ],
   "_comment": "default=blue, important=red, success=green, warning=orange"
