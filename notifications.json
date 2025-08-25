@@ -38,13 +38,6 @@
       "type": "default"
     },
     {
-      "id": "6",
-      "title": "Security Enhancement",
-      "message": "We've implemented additional security measures to protect your data and ensure a safe browsing experience.",
-      "date": "2024-12-05",
-      "type": "warning"
-    },
-    {
       "id": "7",
       "title": "Custom Shortcuts Feature",
       "message": "You can now create custom shortcuts with your own icons and organize them into categories!",
