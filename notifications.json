@@ -13,6 +13,14 @@
       "message": "We're glad to efwefwefwehave you here! Explore the features and customize your new tab experience.",
       "date": "2025-08-26",
       "type": "success"
+    },
+    {
+      "id": "3",
+      "title": "New Wallpaper Collection Added",
+      "message": "We've added 50+ stunning new wallpapers to our collection! Check them out in the wallpaper settings.",
+      "date": "2024-12-27",
+      "type": "success",
+      "link": "https://github.com/manishsharma1804/ManiX-NewTab"
     }
   ],
   "_comment": "default=blue, important=red, success=green, warning=orange"
