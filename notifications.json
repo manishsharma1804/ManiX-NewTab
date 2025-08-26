@@ -4,8 +4,16 @@
       "id": "1",
       "title": "🚀 Welcome to ManiX - Your Personal New Tab Experience!",
       "message": "Thank you for choosing ManiX! Get ready to transform your new tab into a beautiful, productive dashboard. Customize wallpapers, enjoy lightning-fast search, and access your favorite sites instantly. Click to explore all features!",
-      "date": "",
+      "date": "2025-01-26",
       "type": "success",
       "link": "https://manishsharma1804.github.io/ManiX-NewTab/"
+    },
+    {
+      "id": "2",
+      "title": "📢 We Value Your Feedback!",
+      "message": "Encountered any issues or have suggestions to improve ManiX? We'd love to hear from you! Click here to send us your feedback or report any problems.",
+      "date": "2025-08-27",
+      "type": "info",
+      "link": "mailto:contact@manishsharma18.in?subject=ManiX%20Feedback%20%26%20Issues"
     }
   ]}
