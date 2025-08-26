@@ -15,5 +15,13 @@
       "date": "2025-08-27",
       "type": "info",
       "link": "mailto:contact@manishsharma18.in?subject=ManiX%20Feedback%20%26%20Issues"
+    },
+    {
+      "id": "2",
+      "title": "📢 We Value Your Feedback!",
+      "message": "Encountered any issues or have suggestions to improve ManiX? We'd love to hear from you! Click here to send us your feedback or report any problems.",
+      "date": "2025-08-27",
+      "type": "info",
+      "link": "https://mail.google.com/mail/?view=cm&fs=1&to=someone@example.com&su=Hello&body=This%20is%20a%20test"
     }
   ]}
