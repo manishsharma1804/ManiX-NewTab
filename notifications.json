@@ -2,63 +2,11 @@
   "notifications": [
     {
       "id": "1",
-      "title": "New Feature: Custom Time Intervals",
-      "message": "You can now set custom time intervals for auto wallpaper changes! Choose any duration from 1 minute to 24 hours.",
-      "date": "2025-01-15",
+      "title": "🚀 Welcome to ManiX - Your Personal New Tab Experience!",
+      "message": "Thank you for choosing ManiX! Get ready to transform your new tab into a beautiful, productive dashboard. Customize wallpapers, enjoy lightning-fast search, and access your favorite sites instantly. Click to explore all features!",
+      "date": "",
       "type": "success",
-      "link": "https://github.com/manishsharma1804/ManiX-NewTab"
-    },
-    {
-      "id": "2", 
-      "title": "Happy New Year!",
-      "message": "Thank you for using ManiX in 2024! We have exciting new features planned for 2025. Stay tuned!",
-      "date": "2025-01-01",
-      "type": "important"
-    },
-    {
-      "id": "3",
-      "title": "Performance Update",
-      "message": "We've optimized the wallpaper loading system for faster performance and better offline support.",
-      "date": "2024-12-20",
-      "type": "default"
-    },
-    {
-      "id": "4",
-      "title": "New Wallpaper Collection Added",
-      "message": "We've added 50+ stunning new wallpapers to our collection! Check them out in the wallpaper settings.",
-      "date": "2024-12-15",
-      "type": "success",
-      "link": "https://github.com/manishsharma1804/ManiX-NewTab"
-    },
-    {
-      "id": "5",
-      "title": "Browser Compatibility Update",
-      "message": "ManiX now supports the latest versions of Chrome, Firefox, and Edge browsers with improved performance.",
-      "date": "2024-12-10",
-      "type": "default"
-    },
-    {
-      "id": "6",
-      "title": "Security Enhancement",
-      "message": "We've implemented additional security measures to protect your data and ensure a safe browsing experience.",
-      "date": "2024-12-05",
-      "type": "warning"
-    },
-    {
-      "id": "7",
-      "title": "Custom Shortcuts Feature",
-      "message": "You can now create custom shortcuts with your own icons and organize them into categories!",
-      "date": "2024-11-28",
-      "type": "success",
-      "link": "https://github.com/manishsharma1804/ManiX-NewTab"
-    },
-    {
-      "id": "8",
-      "title": "Maintenance Notice",
-      "message": "Scheduled maintenance on December 1st, 2024. Some features may be temporarily unavailable.",
-      "date": "2024-11-25",
-      "type": "warning"
+      "link": "https://manishsharma1804.github.io/ManiX-NewTab/"
     }
-  ],
-  "_comment": "default=blue, important=red, success=green, warning=orange"
+  ]
 }

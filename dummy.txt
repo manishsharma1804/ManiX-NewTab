@@ -1,0 +1,14 @@
+{
+  "notifications": [
+    {
+      "id": "1",
+      "title": "Hello Buddy! Thanks for installing ManiX",
+      "message": "You can now set custom time intervals for auto wallpaper changes! Choose any duration from 1 minute to 24 hours.",
+      "date": "2025-01-26",
+      "type": "success",
+      "link": "https://manishsharma1804.github.io/ManiX-NewTab/"
+    }
+  ],
+  "_comment": "default=blue, important=red, success=green, warning=orange"
+  
+}

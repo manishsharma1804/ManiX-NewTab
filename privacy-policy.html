@@ -12,6 +12,7 @@
     
     <!-- Font Awesome for icons -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="icon" href="resources/manix.png" type="image/png">
     
     <style>
         :root {
@@ -41,6 +42,21 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-touch-callout: none; /* Prevent callout to copy image, etc when tap to hold */
+            -webkit-user-select: none;   /* Prevent copy paste, to allow, change 'none' to 'text' */
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+        
+        /* Enable text selection for content areas */
+        p, h1, h2, h3, h4, h5, h6, li, a, span, div {
+            -webkit-user-select: text;
+            -khtml-user-select: text;
+            -moz-user-select: text;
+            -ms-user-select: text;
+            user-select: text;
         }
 
         html {
@@ -572,9 +588,153 @@
                 font-size: 1rem;
             }
         }
+
+        /* Skeleton Loader Styles */
+        .skeleton-loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--background);
+            z-index: 1000;
+            overflow: hidden; /* Changed from auto to hidden */
+            padding: 1.5rem;
+            -ms-overflow-style: none;  /* IE and Edge */
+            scrollbar-width: none;  /* Firefox */
+        }
+        
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .skeleton-loader::-webkit-scrollbar {
+            display: none;
+        }
+
+        .skeleton-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            margin-bottom: 2rem;
+            max-width: 1200px;
+            margin: 0 auto 2rem;
+        }
+
+        .skeleton-logo {
+            width: 120px;
+            height: 40px;
+            background: var(--border);
+            border-radius: 4px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-nav {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .skeleton-nav-item {
+            width: 60px;
+            height: 24px;
+            background: var(--border);
+            border-radius: 4px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-content {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .skeleton-section {
+            margin-bottom: 2rem;
+        }
+
+        .skeleton-hero-title {
+            height: 48px;
+            background: var(--border);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-hero-text {
+            height: 24px;
+            background: var(--border);
+            border-radius: 4px;
+            margin-bottom: 1rem;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-section-title {
+            width: 250px;
+            height: 32px;
+            background: var(--border);
+            margin: 2rem 0 1.5rem;
+            border-radius: 4px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        .skeleton-section-text {
+            width: 100%;
+            height: 20px;
+            background: var(--border);
+            margin-bottom: 0.75rem;
+            border-radius: 4px;
+            animation: pulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hide {
+            display: none !important;
+        }
     </style>
 </head>
 <body>
+    <!-- Skeleton Loader -->
+    <div class="skeleton-loader" id="skeletonLoader">
+      <div class="skeleton-header">
+        <div class="skeleton-logo"></div>
+        <div class="skeleton-nav">
+          <div class="skeleton-nav-item"></div>
+          <div class="skeleton-nav-item"></div>
+          <div class="skeleton-nav-item"></div>
+        </div>
+      </div>
+      <div class="skeleton-content">
+        <div class="skeleton-section">
+          <div class="skeleton-hero-title" style="width: 300px; margin-bottom: 1.5rem;"></div>
+          <div class="skeleton-hero-text" style="width: 500px; margin-bottom: 2rem;"></div>
+          
+          <div class="skeleton-section-title"></div>
+          <div class="skeleton-section-text"></div>
+          <div class="skeleton-section-text" style="width: 90%;"></div>
+          <div class="skeleton-section-text" style="width: 85%;"></div>
+          
+          <div class="skeleton-section-title" style="margin-top: 2rem;"></div>
+          <div class="skeleton-section-text"></div>
+          <div class="skeleton-section-text" style="width: 95%;"></div>
+          
+          <div class="skeleton-section-title" style="margin-top: 2rem;"></div>
+          <div class="skeleton-section-text"></div>
+          <div class="skeleton-section-text" style="width: 90%;"></div>
+          <div class="skeleton-section-text" style="width: 85%;"></div>
+          
+          <div class="skeleton-section-title" style="margin-top: 2rem;"></div>
+          <div class="skeleton-section-text"></div>
+          <div class="skeleton-section-text" style="width: 80%;"></div>
+          
+          <div class="skeleton-section-title" style="margin-top: 2rem;"></div>
+          <div class="skeleton-section-text"></div>
+          <div class="skeleton-section-text" style="width: 90%;"></div>
+        </div>
+      </div>
+    </div>
+
     <!-- Header -->
     <header id="header">
         <div class="header-content">
@@ -868,6 +1028,17 @@
             if (window.innerWidth > 768 && mobileSidebar.classList.contains('active')) {
                 toggleMobileMenu();
             }
+        });
+
+        // Hide skeleton loader when page is loaded
+        window.addEventListener('load', function() {
+            // Simulate loading time (remove this in production)
+            setTimeout(function() {
+                const skeletonLoader = document.getElementById('skeletonLoader');
+                if (skeletonLoader) {
+                    skeletonLoader.classList.add('hide');
+                }
+            }, 1000); // 1 second delay for demo purposes
         });
     </script>
 </body>
