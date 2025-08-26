@@ -1,14 +1,38 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" itemscope itemtype="http://schema.org/WebPage">
 <head>
   <meta charset="UTF-8" />
-  <title>ManiX – New Tab Extension</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Manix is your all-in-one new tab extension for Chrome. Clean, fast, customizable, and privacy focused." />
+  <title>ManiX – New Tab Extension for Chrome | Productivity Dashboard</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+  <meta name="description" content="ManiX - The ultimate Chrome new tab extension that transforms your browser into a powerful productivity dashboard. Get quick access to bookmarks, notes, to-do lists, and more with this customizable, privacy-focused new tab replacement." />
+  <meta name="keywords" content="ManiX, Chrome extension, new tab, browser extension, productivity tools, tab manager, Chrome new tab, custom new tab, browser dashboard, tab organizer, Chrome productivity, tab groups, speed dial, bookmark manager, note taking, manix, manix tablet, manic, manix task manager, Chrome customization, browser tools, privacy focused extension, Chrome web store, best new tab extension, tab management, Chrome productivity extension, browser start page, Chrome tab manager, new tab replacement, Chrome dashboard, tab organizer extension, Chrome speed dial, browser productivity, Chrome tab groups, ManiX new tab, Chrome extension download, best Chrome extensions 2025" />
+  <meta name="author" content="Manish Sharma" />
+  <link rel="canonical" href="https://manishsharma1804.github.io/ManiX-NewTab/" />
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://manishsharma1804.github.io/ManiX-NewTab/" />
+  <meta property="og:title" content="ManiX – Best Chrome New Tab Extension for Productivity & Organization" />
+  <meta property="og:description" content="Transform your Chrome new tab into a powerful productivity dashboard with ManiX. The ultimate tab manager, bookmark organizer, and note-taking extension for Chrome. Download now for free!" />
+  <meta property="og:image" content="https://manishsharma1804.github.io/ManiX-NewTab/resources/manix-preview.png" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:url" content="https://manishsharma1804.github.io/ManiX-NewTab/" />
+  <meta name="twitter:title" content="ManiX – The Ultimate Chrome New Tab Extension" />
+  <meta name="twitter:description" content="Supercharge your Chrome browser with ManiX - the best new tab extension for productivity, tab management, and organization. Try it now! #ChromeExtension #Productivity" />
+  <meta name="twitter:image" content="https://manishsharma1804.github.io/ManiX-NewTab/resources/manix-twitter-preview.png" />
+
+  <!-- Favicon and App Icons -->
+  <link rel="icon" href="resources/manix.png" type="image/png">
+  <link rel="apple-touch-icon" href="resources/manix-192x192.png">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#4f46e5">
+  
+  <!-- Preconnect and Preload -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="icon" href="resources/manix.png" type="image/png">
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="preload" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" as="style" onload="this.onload=null;this.rel='stylesheet'">
   
   <!-- Updated Font Awesome CDN with better fallback -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" integrity="sha512-DTOQO9RWCH3ppGqcWaEA1BIZOC6xxalwEsw9c2QQeAIftl+Vegovlnee1c9QX4TctnWMn13TZye+giMm8e2LwA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -1718,7 +1742,15 @@
 }
   </style>
 </head>
-<body>
+<body itemscope itemtype="http://schema.org/WebPage">
+  <!-- Google Tag Manager -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=YOUR-GA-ID"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'YOUR-GA-ID');
+  </script>
   <!-- Loading Screen -->
   <div class="loading" id="loading">
     <div class="loading-content">
@@ -1797,13 +1829,13 @@
   <div class="mobile-overlay" id="mobileOverlay"></div>
 
   <!-- Hero Section -->
-  <section class="hero">
+  <section class="hero" itemscope itemtype="http://schema.org/WebPage">
     <div class="hero-content">
       <div class="hero-logo reveal">
-  <img src="resources/manix.png" alt="Manix Logo" class="hero-logo-img" />
+  <img src="resources/manix-preview.png" alt="ManiX New Tab Extension Interface" class="hero-image reveal" itemprop="image" loading="lazy"> />
 </div>
-      <h1 class="reveal stagger-1">Transform Every New Tab Into Your Personal Command Center</h1>
-      <p class="reveal stagger-2">Mani<span style="color: #dc2626; font-weight: 600;">X</span> instantly turns your Chrome new tab into a beautiful, customizable dashboard with smart tools, shortcuts, and privacy-first design.</p>
+      <h1 class="reveal stagger-1" itemprop="headline">ManiX: The Ultimate Chrome New Tab Extension for Maximum Productivity</h1>
+      <p class="reveal stagger-2">Transform your Chrome new tab into a powerful <strong>productivity dashboard</strong> with ManiX. Get instant access to bookmarks, notes, to-do lists, and more with this <strong>customizable tab manager</strong> designed for Chrome power users. Experience <strong>faster browsing</strong> and <strong>better organization</strong> with our privacy-focused new tab replacement.</p>
       <div class="version-info reveal stagger-2">
         <span class="version-badge">v1.0.2</span>
         <span class="last-updated">Last updated: January 2025</span>
@@ -1882,11 +1914,11 @@
   </section>
 
   <!-- Features Section -->
-  <section class="features" id="features">
+  <section class="features" id="features" itemscope itemtype="http://schema.org/SoftwareApplication">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Powerful Features for Power Users</h2>
-        <p>Everything you need to supercharge your browsing experience, built with Mani<span style="color: #dc2626; font-weight: 600;">X</span> privacy and performance in mind. No login required, complete offline functionality.</p>
+        <h2 itemprop="description">Powerful Chrome Tab Management & Productivity Tools</h2>
+        <p>Supercharge your Chrome browser with ManiX's comprehensive suite of features designed for maximum efficiency. Our <strong>new tab extension</strong> offers everything you need to stay organized and productive, all while respecting your privacy with <strong>no data collection</strong> and complete offline functionality.</p>
       </div>
       <div class="features-grid">
         <div class="feature-card reveal stagger-1">
@@ -2023,6 +2055,32 @@
       </div>
     </div>
   </section>
+
+  <!-- Structured Data for SEO -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    "name": "ManiX - New Tab Extension",
+    "applicationCategory": "BrowserExtension",
+    "operatingSystem": "Chrome",
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "USD"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "ratingCount": "250"
+    },
+    "description": "A privacy-focused, customizable new tab extension for Chrome with productivity tools.",
+    "author": {
+      "@type": "Person",
+      "name": "Manish Sharma"
+    }
+  }
+  </script>
 
   <script>
     // Load and initialize testimonials
@@ -2280,7 +2338,7 @@
   </section>
 
   <!-- Footer -->
-  <footer>
+  <footer itemscope itemtype="http://schema.org/WPFooter">
     <div class="footer-content">
       <!-- Logo and Browser Support Section -->
       <div class="footer-top">

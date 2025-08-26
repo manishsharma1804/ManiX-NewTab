@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /preview.html
+Disallow: /wallpapers.json
+Disallow: /tools-and-apps.json
+Disallow: /uninstall.html
+
+Sitemap: https://manishsharma1804.github.io/ManiX-NewTab/sitemap.xml
