@@ -133,6 +133,11 @@
         "alt": "Wallpaper 1"
     },
     {
+        "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/2.mp4",
+        "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/2.png",
+        "alt": "Wallpaper 2"
+    },
+    {
         "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/3.mp4",
         "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/3.png",
         "alt": "Wallpaper 3"
@@ -141,6 +146,31 @@
         "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/4.mp4",
         "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/4.png",
         "alt": "Wallpaper 4"
+    },
+    {
+        "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/5.mp4",
+        "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/5.png",
+        "alt": "Wallpaper 5"
+    },
+    {
+        "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/6.mp4",
+        "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/6.png",
+        "alt": "Wallpaper 6"
+    },
+    {
+        "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/7.mp4",
+        "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/7.png",
+        "alt": "Wallpaper 7"
+    },
+    {
+        "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/8.mp4",
+        "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/8.png",
+        "alt": "Wallpaper 8"
+    },
+    {
+        "url": "https://manishsharma1804.github.io/ManiX-NewTab/videos/9.mp4",
+        "thumbnail": "https://manishsharma1804.github.io/ManiX-NewTab/videos/thumbnail/9.png",
+        "alt": "Wallpaper 9"
     }
 ]
 }
