@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <title>Uninstall ManiX – We're Sorry to See You Go</title>
+  <title>Welcome to ManiX – Installation Successful!</title>
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Thank you for trying ManiX. Help us improve by sharing your feedback." />
+  <meta name="description" content="Welcome to ManiX! Your extension has been successfully installed. Get started with beautiful wallpapers and customization options." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -12,6 +12,22 @@
   <link rel="icon" href="resources/manix.png" type="image/png">
 
   <style>
+    * {
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+      -webkit-touch-callout: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    input, textarea {
+      -webkit-user-select: text;
+      -moz-user-select: text;
+      -ms-user-select: text;
+      user-select: text;
+    }
+
     :root {
       --primary: #4f46e5;
       --primary-light: #6366f1;
@@ -44,14 +60,7 @@
       user-select: none;
     }
     
-    /* Enable text selection for content areas */
-    p, h1, h2, h3, h4, h5, h6, li, a, span, div {
-      -webkit-user-select: text;
-      -khtml-user-select: text;
-      -moz-user-select: text;
-      -ms-user-select: text;
-      user-select: text;
-    }
+    /* Text selection disabled for all elements */
 
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -318,7 +327,7 @@
       width: 100px;
       height: 100px;
       margin: 0 auto 2rem;
-      background: linear-gradient(135deg, var(--error) 0%, #f87171 100%);
+      background: linear-gradient(135deg, var(--accent) 0%, #34d399 100%);
       border-radius: 25px;
       display: flex;
       align-items: center;
@@ -327,17 +336,53 @@
       color: white;
       font-weight: 700;
       box-shadow: var(--shadow-xl);
+      animation: checkboxBounce 1.5s ease-out 0.5s both;
+    }
+
+    @keyframes checkboxBounce {
+      0% {
+        transform: scale(0) rotate(-180deg);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.2) rotate(-90deg);
+        opacity: 0.8;
+      }
+      100% {
+        transform: scale(1) rotate(0deg);
+        opacity: 1;
+      }
+    }
+
+    .hero-logo i {
+      animation: checkmarkDraw 0.8s ease-out 1.2s both;
+    }
+
+    @keyframes checkmarkDraw {
+      0% {
+        transform: scale(0);
+        opacity: 0;
+      }
+      50% {
+        transform: scale(1.3);
+        opacity: 0.7;
+      }
+      100% {
+        transform: scale(1);
+        opacity: 1;
+      }
     }
 
     .hero h1 {
       font-size: clamp(2rem, 4vw, 3rem);
       font-weight: 800;
       margin-bottom: 1.5rem;
-      background: linear-gradient(135deg, var(--text-primary) 0%, var(--error) 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      color: var(--text-primary);
       line-height: 1.2;
+    }
+
+    .hero h1 span {
+      color: #dc2626 !important;
     }
 
     .hero p {
@@ -916,6 +961,67 @@
     .hide {
       display: none !important;
     }
+
+    /* Getting Started Steps Styles */
+    .getting-started-steps {
+      margin-bottom: 2rem;
+    }
+
+    .step-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+      padding: 1.5rem;
+      background: var(--surface);
+      border-radius: 15px;
+      border: 1px solid var(--border-light);
+      transition: all 0.3s ease;
+    }
+
+    .step-item:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--primary);
+    }
+
+    .step-number {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-primary);
+      color: white;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h3 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+
+    .step-content p {
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    kbd {
+      background: var(--surface-elevated);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 0.2rem 0.4rem;
+      font-family: monospace;
+      font-size: 0.9rem;
+      color: var(--text-primary);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+    }
   </style>
 </head>
 <body>
@@ -929,12 +1035,11 @@
         </div>
       </a>
       <nav id="nav">
-        <a href="index.html">Home</a>
         <a href="index.html#features">Features</a>
         <a href="privacy-policy.html">Privacy Policy</a>
-        <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" class="cta-button">
-          <i class="fas fa-download"></i>
-          Reinstall
+        <a href="index.html" class="cta-button">
+          <i class="fas fa-home"></i>
+          Go Home
         </a>
       </nav>
       <div class="mobile-menu-toggle" id="mobileMenuToggle">
@@ -948,12 +1053,11 @@
   <!-- Mobile Sidebar -->
   <div class="mobile-sidebar" id="mobileSidebar">
     <nav class="mobile-sidebar-nav">
-      <a href="index.html">Home</a>
       <a href="index.html#features">Features</a>
       <a href="privacy-policy.html">Privacy Policy</a>
-      <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" class="cta-button">
-        <i class="fas fa-download"></i>
-        Reinstall
+      <a href="index.html" class="cta-button">
+        <i class="fas fa-home"></i>
+        Go Home
       </a>
     </nav>
   </div>
@@ -1001,126 +1105,109 @@
   <!-- Hero Section -->
   <section class="hero">
     <div class="hero-content">
-      <div class="hero-logo reveal">
-        <i class="fas fa-heart-broken"></i>
+      <div class="hero-logo">
+        <i class="fas fa-check-circle"></i>
       </div>
-      <h1 class="reveal stagger-1">We're Sorry to See You Go</h1>
-      <p class="reveal stagger-2">Thank you for trying Mani<span style="color: #dc2626; font-weight: 600;">X</span>. Your feedback helps us improve and create a better experience for everyone.</p>
+      <h1 class="reveal stagger-1">Welcome to Mani<span style="color: #dc2626; font-weight: 600;">X</span>!</h1>
+      <div class="reveal stagger-3" style="margin-top: 1.5rem; background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(52, 211, 153, 0.1) 100%); border: 1px solid rgba(16, 185, 129, 0.2); border-radius: 12px; padding: 1.5rem; max-width: 700px; margin-left: auto; margin-right: auto; text-align: left; min-height: 200px;">
+        <div id="welcomeMessage" style="font-size: 1.1rem; line-height: 1.8; color: var(--text-secondary);"></div>
+        <div id="signature" style="margin-top: 0.5rem; font-style: italic; color: var(--text-muted); font-size: 0.9rem;"></div>
+      </div>
     </div>
   </section>
 
-  <!-- Feedback Form Section -->
-  <section class="feedback-section" id="feedback">
+  <!-- Getting Started Section -->
+  <section class="feedback-section" id="getting-started">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Help Us Improve</h2>
-        <p>Your feedback is valuable to us. Please take a moment to share why you're uninstalling Mani<span style="color: #dc2626; font-weight: 600;">X</span>.</p>
+        <h2>Get Started with Mani<span style="color: #dc2626; font-weight: 600;">X</span></h2>
+        <p>Here's how to make the most of your new extension and customize your browsing experience.</p>
       </div>
 
       <div class="feedback-form reveal stagger-1">
-        <div class="success-message" id="successMessage">
-          <i class="fas fa-check-circle"></i>
-          Thank you for your feedback! We appreciate your input and will use it to improve ManiX.
-        </div>
-
-        <form id="feedbackForm">
-          <div class="form-group">
-            <label>What were your main reasons for uninstalling? (Select all that apply)</label>
-            <div class="checkbox-group">
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason1" name="reasons" value="performance">
-                <label for="reason1">Performance issues</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason2" name="reasons" value="features">
-                <label for="reason2">Missing features I needed</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason3" name="reasons" value="complexity">
-                <label for="reason3">Too complex to use</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason4" name="reasons" value="alternative">
-                <label for="reason4">Found a better alternative</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason5" name="reasons" value="privacy">
-                <label for="reason5">Privacy concerns</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason6" name="reasons" value="bugs">
-                <label for="reason6">Encountered bugs or errors</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason7" name="reasons" value="design">
-                <label for="reason7">Didn't like the design</label>
-              </div>
-              <div class="checkbox-item">
-                <input type="checkbox" id="reason8" name="reasons" value="temporary">
-                <label for="reason8">Temporary removal</label>
-              </div>
+        <div class="getting-started-steps">
+          <div class="step-item">
+            <div class="step-number">1</div>
+            <div class="step-content">
+              <h3>Open a New Tab</h3>
+              <p>Press <kbd>Ctrl+T</kbd> (Windows/Linux) or <kbd>Cmd+T</kbd> (Mac) to open a new tab and see ManiX in action!</p>
             </div>
           </div>
-
-          <div class="form-group">
-            <label for="feedback">Additional feedback (optional)</label>
-            <textarea id="feedback" name="feedback" placeholder="Tell us more about your experience or what we could do better... You can enter your email or contact details here to get updates related to your issues if needed."></textarea>
+          
+          <div class="step-item">
+            <div class="step-number">2</div>
+            <div class="step-content">
+              <h3>Explore Beautiful Wallpapers</h3>
+              <p>Browse through our curated collection of stunning wallpapers and find the perfect background for your mood.</p>
+            </div>
           </div>
-
-          <div class="form-buttons">
-            <button type="submit" class="btn-primary">
-              <i class="fas fa-paper-plane"></i>
-              Submit Feedback
-            </button>
-            <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" class="btn-secondary">
-              <i class="fas fa-undo"></i>
-              Reinstall ManiX
-            </a>
+          
+          <div class="step-item">
+            <div class="step-number">3</div>
+            <div class="step-content">
+              <h3>Customize Your Experience</h3>
+              <p>Use the settings panel to personalize your new tab page with widgets, shortcuts, and your favorite tools.</p>
+            </div>
           </div>
-        </form>
+          
+          <div class="step-item">
+            <div class="step-number">4</div>
+            <div class="step-content">
+              <h3>Enjoy Your Enhanced Browsing</h3>
+              <p>Every new tab is now a delightful experience with beautiful visuals and useful functionality at your fingertips.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-buttons">
+          <a href="index.html" class="btn-primary">
+            <i class="fas fa-home"></i>
+            Back to Homepage
+          </a>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Common Reasons Section -->
+  <!-- Features & Benefits Section -->
   <section class="reasons-section">
     <div class="container">
       <div class="section-header reveal">
-        <h2>Common Reasons for Uninstalling</h2>
-        <p>We understand that extensions don't work for everyone. Here are some common reasons and how we're addressing them.</p>
+        <h2>What Makes Mani<span style="color: #dc2626; font-weight: 600;">X</span> Special</h2>
+        <p>Discover the powerful features that make ManiX the perfect companion for your browsing experience.</p>
       </div>
 
       <div class="reasons-grid">
         <div class="reason-card reveal stagger-1">
           <div class="reason-icon">
-            <i class="fas fa-tachometer-alt"></i>
+            <i class="fas fa-images"></i>
           </div>
-          <h3>Performance Concerns</h3>
-          <p>We're constantly optimizing ManiX to use minimal system resources while providing maximum functionality.</p>
+          <h3>Beautiful Wallpapers</h3>
+          <p>Access thousands of high-quality wallpapers across various categories to personalize your new tab experience.</p>
         </div>
 
         <div class="reason-card reveal stagger-2">
           <div class="reason-icon">
-            <i class="fas fa-puzzle-piece"></i>
+            <i class="fas fa-cogs"></i>
           </div>
-          <h3>Missing Features</h3>
-          <p>We regularly add new features based on user feedback. Your suggestions help shape our roadmap.</p>
+          <h3>Full Customization</h3>
+          <p>Customize widgets, shortcuts, and layout to create a new tab page that perfectly fits your workflow.</p>
         </div>
 
         <div class="reason-card reveal stagger-3">
           <div class="reason-icon">
             <i class="fas fa-shield-alt"></i>
           </div>
-          <h3>Privacy First</h3>
-          <p>ManiX operates completely offline with no data collection. Your privacy is our top priority.</p>
+          <h3>Privacy Focused</h3>
+          <p>ManiX works completely offline with zero data collection. Your browsing habits stay private and secure.</p>
         </div>
 
         <div class="reason-card reveal stagger-4">
           <div class="reason-icon">
-            <i class="fas fa-bug"></i>
+            <i class="fas fa-bolt"></i>
           </div>
-          <h3>Bug Reports</h3>
-          <p>We take all bug reports seriously and work quickly to fix issues in our regular updates.</p>
+          <h3>Lightning Fast</h3>
+          <p>Optimized for performance with instant loading and smooth animations that won't slow down your browser.</p>
         </div>
       </div>
     </div>
@@ -1151,7 +1238,7 @@
       </div>
       
       <div class="footer-bottom">
-        <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); margin: 0.5rem 0 0.25rem 0;">&copy; 2024-2025 Mani<span style="color: #dc2626; font-weight: 600;">X</span> Chrome Extension v1.0.2 | Last updated: January 2025 | All rights reserved.</p>
+        <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); margin: 0.5rem 0 0.25rem 0;">&copy; 2024-2025 Mani<span style="color: #dc2626; font-weight: 600;">X</span> Chrome Extension v2.0.18 | Last updated: January 2025 | All rights reserved.</p>
         <p style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.5); margin: 0.25rem 0 0.5rem 0;">Developed with ❤️ in India by <a href="https://manishsharma18.in" target="_blank" style="color: #dc2626; text-decoration: none; font-size: 0.75rem;">Manish Sharma</a></p>
       </div>
     </div>
@@ -1188,66 +1275,87 @@
       observer.observe(el);
     });
 
-    // Form submission
-    document.getElementById('feedbackForm').addEventListener('submit', function(e) {
-      e.preventDefault();
+    // Function to open new tab
+    function openNewTab() {
+      // Show instruction since extensions don't work on about:blank from localhost
+      showNotification('To see ManiX in action, please open a new tab manually using Ctrl+T (Windows/Linux) or Cmd+T (Mac). Your extension will automatically load!', 'info');
+    }
+
+    // Function to show notifications
+    function showNotification(message, type = 'info') {
+      const notification = document.createElement('div');
+      const bgColor = type === 'success' ? 'var(--accent)' : 'var(--primary)';
+      notification.style.cssText = `
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: ${bgColor};
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 12px;
+        box-shadow: var(--shadow-lg);
+        z-index: 1001;
+        font-weight: 600;
+        animation: slideInRight 0.5s ease-out;
+        max-width: 350px;
+        font-size: 0.9rem;
+      `;
+      notification.innerHTML = `<i class="fas fa-info-circle" style="margin-right: 0.5rem;"></i>${message}`;
       
-      // Get form data
-      const formData = new FormData(this);
-      const reasons = [];
-      const checkboxes = document.querySelectorAll('input[name="reasons"]:checked');
-      checkboxes.forEach(checkbox => {
-        reasons.push(checkbox.value);
-      });
+      document.body.appendChild(notification);
       
-      const feedback = formData.get('feedback');
+      // Remove after 5 seconds
+      setTimeout(() => {
+        notification.style.animation = 'slideInRight 0.5s ease-out reverse';
+        setTimeout(() => notification.remove(), 500);
+      }, 5000);
+    }
+
+    // Welcome message with typing effect in hero section
+    document.addEventListener('DOMContentLoaded', () => {
+      const messageElement = document.getElementById('welcomeMessage');
+      const signatureElement = document.getElementById('signature');
       
-      // Prepare data for submission
-      const submissionData = {
-        reasons: reasons,
-        feedback: feedback || '',
-        userAgent: navigator.userAgent,
-        timestamp: new Date().toISOString()
-      };
+      // Clear any existing content
+      messageElement.innerHTML = '';
+      signatureElement.innerHTML = '';
       
-      // Update button state
-      const submitBtn = document.querySelector('.btn-primary');
-      const originalText = submitBtn.innerHTML;
-      submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Submitting...';
-      submitBtn.disabled = true;
-      
-      // Google Apps Script URL for form submission
-      const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzsuARoDXy10euoZe_V5Pgk3fbzVMHwjhxHg5Lq3qhV8Ragfm0K-ZVwPzDGvuxrmsfFow/exec';
-      
-      // Submit to Google Sheets
-      fetch(GOOGLE_SCRIPT_URL, {
-        method: 'POST',
-        mode: 'no-cors',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(submissionData)
-      })
-      .then(() => {
-        // Show success message
-        document.getElementById('successMessage').classList.add('show');
-        this.reset();
-        
-        // Scroll to success message
-        document.getElementById('successMessage').scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'center' 
-        });
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('There was an error submitting your feedback. Please try again.');
-      })
-      .finally(() => {
-        // Reset button
-        submitBtn.innerHTML = originalText;
-        submitBtn.disabled = false;
-      });
+      // Start typing after a longer delay to ensure page is fully loaded and visible
+      setTimeout(async () => {
+        try {
+          // Type "Dear User," with typing effect
+          await typeWriter(messageElement, 'Dear User,', 40);
+          
+          // Add line breaks for the next part
+          const lineBreak = document.createElement('div');
+          lineBreak.style.margin = '0.5rem 0';
+          messageElement.appendChild(lineBreak);
+          
+          // Create a span for the typing message
+          const typingSpan = document.createElement('span');
+          messageElement.appendChild(typingSpan);
+          
+          await typeWriter(
+            typingSpan, 
+            'Welcome to the ManiX family! 🎉<br><br>Your installation was successful and you\'re now part of our growing community of users who love beautiful, customizable new tab experiences.<br><br>We\'re thrilled to have you on board and hope ManiX enhances your browsing experience every day. If you have any questions or feedback, please don\'t hesitate to reach out to us.<br><br>Thank you for choosing ManiX!',
+            25
+          );
+          
+          // Signature
+          signatureElement.style.opacity = '1';
+          await typeWriter(
+            signatureElement,
+            '<br>Regards,<br><strong style="font-size: 1.1em;">Manish Sharma</strong>',
+            30
+          );
+        } catch (error) {
+          console.error('Error in welcome message animation:', error);
+          // Fallback in case of error
+          messageElement.innerHTML = 'Dear User,<br><br>Thank you for being a member of our growing community! 🌟';
+          signatureElement.innerHTML = 'Regards,<br><strong>Manish Sharma</strong>';
+          signatureElement.style.opacity = '1';
+        }
+      }, 2000);
     });
 
     // Header scroll effect
@@ -1316,10 +1424,100 @@
       }
     });
 
-    // Prevent form resubmission on page refresh
-    if (window.history.replaceState) {
-      window.history.replaceState(null, null, window.location.href);
+   // Add confetti effect on page load
+function createConfetti() {
+  const colors = ['#4f46e5', '#dc2626', '#10b981', '#f59e0b', '#8b5cf6'];
+  const confettiCount = 50;
+  
+  for (let i = 0; i < confettiCount; i++) {
+    const confetti = document.createElement('div');
+    confetti.style.cssText = `
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      background: ${colors[Math.floor(Math.random() * colors.length)]};
+      top: -10px;
+      left: ${Math.random() * 100}vw;
+      z-index: 1000;
+      border-radius: 50%;
+      pointer-events: none;
+      animation: confettiFall ${2 + Math.random() * 3}s linear forwards;
+    `;
+    
+    document.body.appendChild(confetti);
+    
+    setTimeout(() => confetti.remove(), 5000);
+  }
+}
+
+// Add confetti animation keyframes
+const confettiStyle = document.createElement('style');
+confettiStyle.textContent = `
+  @keyframes confettiFall {
+    to {
+      transform: translateY(100vh) rotate(360deg);
+      opacity: 0;
     }
+  }
+`;
+document.head.appendChild(confettiStyle);
+
+// Trigger confetti after skeleton loader disappears
+setTimeout(() => {
+  createConfetti();
+}, 1500);
+
+// Typing effect for community message
+function typeWriter(element, text, speed = 50) {
+  return new Promise((resolve) => {
+    let i = 0;
+    element.innerHTML = '';
+    
+    const originalContent = element.innerHTML;
+    function type() {
+      if (i < text.length) {
+        const displayText = text.substring(0, i + 1);
+        element.innerHTML = originalContent + displayText + '<span style="border-right: 2px solid var(--text-secondary); animation: blink 1s infinite;"></span>';
+        i++;
+        setTimeout(type, speed);
+      } else {
+        // Remove cursor after typing is complete
+        element.innerHTML = originalContent + text;
+        setTimeout(() => {
+          resolve();
+        }, 500);
+      }
+    }
+    type();
+  });
+}
+
+// Add blinking cursor animation
+const cursorStyle = document.createElement('style');
+cursorStyle.textContent = `
+  @keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+  }
+`;
+document.head.appendChild(cursorStyle);
+
+// Removed duplicate typing animation to prevent conflicts
+
+  </script>
+
+  <script>
+    // Block developer tools and inspect element
+    document.addEventListener('contextmenu', e => e.preventDefault());
+    document.addEventListener('keydown', e => {
+      if (e.key === 'F12' || 
+          (e.ctrlKey && e.shiftKey && e.key === 'I') ||
+          (e.ctrlKey && e.shiftKey && e.key === 'C') ||
+          (e.ctrlKey && e.shiftKey && e.key === 'J') ||
+          (e.ctrlKey && e.key === 'U')) {
+        e.preventDefault();
+      }
+    });
   </script>
   
 </body>
