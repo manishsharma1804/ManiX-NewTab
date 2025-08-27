@@ -1741,74 +1741,6 @@
   }
 }
   </style>
-  
-  <!-- Thank You Modal Styles -->
-  <style>
-    .modal-overlay {
-      display: none;
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
-      opacity: 0;
-      transition: opacity 0.3s ease;
-    }
-
-    .modal-overlay.active {
-      display: flex;
-      opacity: 1;
-    }
-
-    .thank-you-modal {
-      background: white;
-      padding: 2.5rem;
-      border-radius: 12px;
-      max-width: 500px;
-      width: 90%;
-      text-align: center;
-      transform: translateY(20px);
-      transition: transform 0.3s ease;
-      box-shadow: var(--shadow-xl);
-      position: relative;
-    }
-
-    .modal-overlay.active .thank-you-modal {
-      transform: translateY(0);
-    }
-
-    .thank-you-modal h2 {
-      color: var(--primary);
-      margin-bottom: 1rem;
-      font-size: 2rem;
-    }
-
-    .thank-you-modal p {
-      color: var(--text-secondary);
-      margin-bottom: 1.5rem;
-      line-height: 1.6;
-    }
-
-    .close-modal {
-      position: absolute;
-      top: 1rem;
-      right: 1rem;
-      background: none;
-      border: none;
-      font-size: 1.5rem;
-      cursor: pointer;
-      color: var(--text-muted);
-      transition: color 0.2s;
-    }
-
-    .close-modal:hover {
-      color: var(--primary);
-    }
-  </style>
 </head>
 <body itemscope itemtype="http://schema.org/WebPage">
   <!-- Google Tag Manager -->
@@ -2150,58 +2082,7 @@
   }
   </script>
 
-  <!-- Thank You Modal -->
-  <div class="modal-overlay" id="thankYouModal">
-    <div class="thank-you-modal">
-      <button class="close-modal" id="closeModal">&times;</button>
-      <h2>🎉 Thank You for Installing ManiX!</h2>
-      <p>We're thrilled to have you on board! ManiX will transform your new tab into a powerful productivity dashboard.</p>
-      <p>Get started by customizing your dashboard and exploring all the amazing features we've built for you.</p>
-      <a href="#features" class="cta-button" style="margin-top: 1rem;">Explore Features</a>
-    </div>
-  </div>
-
   <script>
-    // Check if user came from Chrome Web Store
-    document.addEventListener('DOMContentLoaded', function() {
-      const referrer = document.referrer.toLowerCase();
-      const isFromChromeWebStore = referrer.includes('chrome.google.com/webstore') || 
-                                 referrer.includes('chromewebstore.google.com');
-      
-      if (isFromChromeWebStore) {
-        const modal = document.getElementById('thankYouModal');
-        const closeButton = document.getElementById('closeModal');
-        
-        // Show modal after a short delay for better UX
-        setTimeout(() => {
-          modal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }, 1500);
-        
-        // Close modal when clicking the close button
-        closeButton.addEventListener('click', () => {
-          modal.classList.remove('active');
-          document.body.style.overflow = '';
-        });
-        
-        // Close modal when clicking outside the modal content
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-          }
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && modal.classList.contains('active')) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-          }
-        });
-      }
-    });
-
     // Load and initialize testimonials
     document.addEventListener('DOMContentLoaded', function() {
       const slider = document.getElementById('testimonials-slider');
@@ -2902,57 +2783,6 @@
     document.addEventListener('DOMContentLoaded', function() {
       initStarRatings();
     });
-    
-    // Check if user came from Chrome Web Store
-    document.addEventListener('DOMContentLoaded', function() {
-      const referrer = document.referrer.toLowerCase();
-      const isFromChromeWebStore = referrer.includes('chrome.google.com/webstore') || 
-                                 referrer.includes('chromewebstore.google.com');
-      
-      if (isFromChromeWebStore) {
-        const modal = document.getElementById('thankYouModal');
-        const closeButton = document.getElementById('closeModal');
-        
-        // Show modal after a short delay for better UX
-        setTimeout(() => {
-          modal.classList.add('active');
-          document.body.style.overflow = 'hidden';
-        }, 1500);
-        
-        // Close modal when clicking the close button
-        closeButton.addEventListener('click', () => {
-          modal.classList.remove('active');
-          document.body.style.overflow = '';
-        });
-        
-        // Close modal when clicking outside the modal content
-        modal.addEventListener('click', (e) => {
-          if (e.target === modal) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-          }
-        });
-        
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-          if (e.key === 'Escape' && modal.classList.contains('active')) {
-            modal.classList.remove('active');
-            document.body.style.overflow = '';
-          }
-        });
-      }
-    });
   </script>
-  
-  <!-- Thank You Modal -->
-  <div class="modal-overlay" id="thankYouModal">
-    <div class="thank-you-modal">
-      <button class="close-modal" id="closeModal">&times;</button>
-      <h2>🎉 Thank You for Installing ManiX!</h2>
-      <p>We're thrilled to have you on board! ManiX will transform your new tab into a powerful productivity dashboard.</p>
-      <p>Get started by customizing your dashboard and exploring all the amazing features we've built for you.</p>
-      <a href="#features" class="cta-button" style="margin-top: 1rem;">Explore Features</a>
-    </div>
-  </div>
 </body>
 </html>
