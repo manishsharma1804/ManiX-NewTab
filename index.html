@@ -225,7 +225,8 @@
       padding: 0.5rem 0;
     }
 
-    nav a:hover {
+    nav a:hover,
+    nav a.active {
       color: var(--primary);
     }
 
@@ -238,12 +239,11 @@
       height: 2px;
       background: var(--gradient-primary);
       transition: width 0.3s ease;
-      display: none; /* Hide the underline effect */
     }
 
-    nav a:hover::after {
+    nav a:hover::after,
+    nav a.active::after {
       width: 100%;
-      display: none; /* Ensure it stays hidden on hover */
     }
 
     .cta-button {
@@ -344,7 +344,8 @@
       z-index: 1001;
     }
 
-    .mobile-sidebar-nav a:hover {
+    .mobile-sidebar-nav a:hover,
+    .mobile-sidebar-nav a.active {
       background: #f9fafb;
       color: #dc2626 !important;
       padding-left: 2rem;
@@ -2182,6 +2183,7 @@
         <a href="#shortcuts">Shortcuts</a>
         <a href="#why">Why Mani<span style="color: #dc2626; font-weight: 600;">X</span>?</a>
         <a href="#testimonials">Testimonials</a>
+        <a href="#faq">FAQ</a>
         <a href="#contact">Contact</a>
         <a href="privacy-policy.html">Privacy Policy</a>
         <a href="https://chromewebstore.google.com/detail/manix/hefdcbkkckmofhfklnpgpkabdbmdagkd" target="_blank" rel="noopener" class="cta-button">
@@ -2204,6 +2206,7 @@
       <a href="#shortcuts">Shortcuts</a>
       <a href="#why">Why ManiX?</a>
       <a href="#testimonials">Testimonials</a>
+      <a href="#faq">FAQ</a>
       <a href="#contact">Contact</a>
       <a href="privacy-policy.html">Privacy Policy</a>
     </nav>
@@ -2345,7 +2348,7 @@
             <span class="feature-icon">⌨️</span>
             Keyboard Shortcuts
           </h3>
-          <p>Lightning-fast navigation with powerful keyboard shortcuts. Press 1-6 for sections, Ctrl+S for settings, / for search, and more for ultimate productivity.</p>
+          <p>Lightning-fast navigation with powerful keyboard shortcuts. Press 1-6 for sections, Ctrl+S for settings, S for search, and more for ultimate productivity.</p>
         </div>
         <div class="feature-card reveal stagger-7">
           <h3>
@@ -2700,6 +2703,9 @@
       });
     }
   </script>
+
+  <!-- FAQ Section -->
+  <section class="faq" id="faq">
     <div class="container">
       <div class="section-header reveal">
         <h2>Frequently Asked Questions</h2>
@@ -2805,6 +2811,15 @@
             Enter your city name in the Location & Weather settings. ManiX will fetch real-time weather data and display it alongside the date. You can also use auto-detect location or manually refresh the weather data.
           </div>
         </div>
+        <div class="faq-item reveal stagger-11">
+          <div class="faq-question">
+            <span>Do I need internet connection for all features?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            Most of ManiX works completely offline, including shortcuts, notes, to-do lists, static wallpapers, and user-uploaded live wallpapers. However, some features like weather updates, online live wallpapers, and real-time data require an active internet connection to function properly.
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -2834,6 +2849,10 @@
           <a href="https://instagram.com/me.manish18" target="_blank" class="social-link">
             <i class="fab fa-instagram"></i>
             <span>Follow on Instagram</span>
+          </a>
+          <a href="https://linkedin.com/in/manishsharma18" target="_blank" class="social-link">
+            <i class="fab fa-linkedin"></i>
+            <span>Connect on LinkedIn</span>
           </a>
           <a href="https://manishsharma18.in" target="_blank" class="social-link">
             <i class="fas fa-globe"></i>
@@ -3164,8 +3183,76 @@
       }
     }, 1500);
 
+    // Navigation active state handling with scroll spy
+    function setActiveNavigation() {
+      const currentPage = window.location.pathname;
+      const navLinks = document.querySelectorAll('nav a, .mobile-sidebar-nav a');
+      
+      // Remove all active classes first
+      navLinks.forEach(link => link.classList.remove('active'));
+      
+      // Set active state based on current page
+      if (currentPage.includes('privacy-policy.html')) {
+        const privacyLinks = document.querySelectorAll('a[href="privacy-policy.html"]');
+        privacyLinks.forEach(link => link.classList.add('active'));
+      } else {
+        // For main page, determine active section based on scroll position
+        const sections = ['features', 'shortcuts', 'why', 'testimonials', 'faq', 'contact'];
+        let activeSection = 'features'; // default
+        let maxVisibleArea = 0;
+        
+        // Find the section with the most visible area
+        for (const sectionId of sections) {
+          const section = document.getElementById(sectionId);
+          if (section) {
+            const rect = section.getBoundingClientRect();
+            const headerHeight = 100; // Account for fixed header
+            const windowHeight = window.innerHeight;
+            
+            // Calculate visible area of this section
+            const visibleTop = Math.max(rect.top, headerHeight);
+            const visibleBottom = Math.min(rect.bottom, windowHeight);
+            const visibleArea = Math.max(0, visibleBottom - visibleTop);
+            
+            // If this section has more visible area, make it active
+            if (visibleArea > maxVisibleArea && visibleArea > 50) { // Minimum 50px visible
+              maxVisibleArea = visibleArea;
+              activeSection = sectionId;
+            }
+          }
+        }
+        
+        // Set active class on corresponding nav links
+        const activeLinks = document.querySelectorAll(`a[href="#${activeSection}"]`);
+        activeLinks.forEach(link => link.classList.add('active'));
+      }
+    }
+
+    // Throttle function to limit scroll event frequency
+    function throttle(func, limit) {
+      let inThrottle;
+      return function() {
+        const args = arguments;
+        const context = this;
+        if (!inThrottle) {
+          func.apply(context, args);
+          inThrottle = true;
+          setTimeout(() => inThrottle = false, limit);
+        }
+      }
+    }
+
     // Hide all selections, touch highlights, and icon backgrounds
     document.addEventListener('DOMContentLoaded', function() {
+      // Set initial active navigation
+      setActiveNavigation();
+      
+      // Update active state on hash change
+      window.addEventListener('hashchange', setActiveNavigation);
+      
+      // Add scroll spy functionality
+      window.addEventListener('scroll', throttle(setActiveNavigation, 100));
+      
       // Remove text selection
       document.body.style.userSelect = 'none';
       document.body.style.webkitUserSelect = 'none';

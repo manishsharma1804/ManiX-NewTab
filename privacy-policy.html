@@ -171,8 +171,25 @@
             padding: 0.5rem 0;
         }
 
-        nav a:hover {
+        nav a:hover,
+        nav a.active {
             color: var(--primary);
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--gradient-primary);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover::after,
+        nav a.active::after {
+            width: 100%;
         }
 
         /* Mobile menu */
@@ -247,7 +264,8 @@
             z-index: 1001;
         }
 
-        .mobile-sidebar-nav a:hover {
+        .mobile-sidebar-nav a:hover,
+        .mobile-sidebar-nav a.active {
             background: #f9fafb;
             color: #dc2626 !important;
             padding-left: 2rem;
@@ -1069,6 +1087,12 @@
                 (e.ctrlKey && e.key === 'U')) {
                 e.preventDefault();
             }
+        });
+
+        // Set Privacy Policy link as active when on this page
+        document.addEventListener('DOMContentLoaded', function() {
+            const privacyLinks = document.querySelectorAll('a[href="privacy-policy.html"]');
+            privacyLinks.forEach(link => link.classList.add('active'));
         });
     </script>
 </body>
