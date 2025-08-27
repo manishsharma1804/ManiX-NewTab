@@ -587,6 +587,372 @@
       background: var(--surface);
     }
 
+    /* Keyboard Shortcuts Section */
+    .keyboard-shortcuts {
+      padding: 6rem 2rem;
+      background: linear-gradient(135deg, var(--surface-elevated) 0%, var(--background) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .keyboard-shortcuts::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: radial-gradient(circle at 20% 80%, rgba(79, 70, 229, 0.05) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .shortcuts-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 3rem;
+      position: relative;
+      z-index: 1;
+      align-items: start;
+    }
+
+    .shortcuts-category {
+      background: var(--surface);
+      border-radius: 20px;
+      padding: 2rem;
+      box-shadow: var(--shadow);
+      border: 1px solid var(--border-light);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+    }
+
+    .shortcuts-category:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-xl);
+    }
+
+    .shortcuts-category h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .shortcuts-category h3::before {
+      content: '';
+      width: 4px;
+      height: 24px;
+      background: var(--gradient-primary);
+      border-radius: 2px;
+    }
+
+    .shortcut-list {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      flex: 1;
+      justify-content: flex-start;
+    }
+
+    .shortcut-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 0.75rem;
+      background: var(--surface-elevated);
+      border-radius: 12px;
+      border: 1px solid var(--border-light);
+      transition: all 0.3s ease;
+    }
+
+    .shortcut-item:hover {
+      background: var(--background);
+      border-color: var(--primary);
+      transform: translateX(5px);
+    }
+
+    .shortcut-item kbd {
+      background: var(--gradient-primary);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      min-width: 2rem;
+      text-align: center;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .shortcut-item kbd::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+      transition: left 0.5s ease;
+    }
+
+    .shortcut-item:hover kbd {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .shortcut-item:hover kbd::before {
+      left: 100%;
+    }
+
+    .shortcut-item kbd + kbd {
+      margin-left: 0.25rem;
+    }
+
+    .shortcut-item span {
+      color: var(--text-secondary);
+      font-weight: 500;
+      flex: 1;
+    }
+
+    .shortcuts-tip {
+      background: linear-gradient(135deg, rgba(79, 70, 229, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border: 2px solid var(--primary);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 3rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .tip-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .shortcuts-tip p {
+      font-size: 1.1rem;
+      color: var(--text-primary);
+      margin: 0;
+    }
+
+    .shortcuts-tip kbd {
+      background: var(--primary);
+      color: white;
+      padding: 0.3rem 0.6rem;
+      border-radius: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0 0.2rem;
+    }
+
+    .shortcuts-demo {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.1) 0%, rgba(6, 182, 212, 0.1) 100%);
+      border: 2px solid var(--accent);
+      border-radius: 20px;
+      padding: 2rem;
+      margin-top: 2rem;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .shortcuts-demo h3 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    .shortcuts-demo p {
+      font-size: 1.1rem;
+      color: var(--text-secondary);
+      margin-bottom: 1.5rem;
+    }
+
+    .demo-highlight {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      flex-wrap: wrap;
+      background: var(--surface);
+      border-radius: 15px;
+      padding: 1.5rem;
+      border: 1px solid var(--border-light);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .demo-text {
+      font-weight: 600;
+      color: var(--accent);
+      font-size: 1rem;
+    }
+
+    .demo-highlight kbd {
+      background: var(--accent);
+      color: white;
+      padding: 0.4rem 0.8rem;
+      border-radius: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9rem;
+      font-weight: 600;
+      margin: 0 0.3rem;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    .demo-highlight span {
+      color: var(--text-secondary);
+      font-weight: 500;
+    }
+
+    /* Mobile responsiveness for keyboard shortcuts */
+    @media (max-width: 768px) {
+      .shortcuts-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+
+      .shortcuts-category {
+        padding: 1.5rem;
+      }
+
+      .shortcuts-category h3 {
+        font-size: 1.3rem;
+        margin-bottom: 1rem;
+      }
+
+      .shortcut-item {
+        padding: 0.6rem;
+        gap: 0.8rem;
+      }
+
+      .shortcut-item kbd {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+        min-width: 1.8rem;
+      }
+
+      .shortcut-item span {
+        font-size: 0.9rem;
+      }
+
+      .shortcuts-tip {
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .shortcuts-tip p {
+        font-size: 1rem;
+      }
+
+      .shortcuts-demo {
+        padding: 1.5rem;
+        margin-top: 2rem;
+      }
+
+      .shortcuts-demo h3 {
+        font-size: 1.3rem;
+      }
+
+      .shortcuts-demo p {
+        font-size: 1rem;
+      }
+
+      .demo-highlight {
+        padding: 1.2rem;
+        gap: 0.8rem;
+      }
+
+      .demo-highlight kbd {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.8rem;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .keyboard-shortcuts {
+        padding: 4rem 1rem;
+      }
+
+      .shortcuts-category {
+        padding: 1.2rem;
+      }
+
+      .shortcut-item {
+        flex-direction: row;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.5rem;
+      }
+
+      .shortcut-item kbd {
+        flex-shrink: 0;
+        min-width: 1.5rem;
+        padding: 0.25rem 0.5rem;
+        font-size: 0.75rem;
+      }
+
+      .shortcut-item span {
+        font-size: 0.85rem;
+        flex: 1;
+      }
+
+      .shortcuts-tip {
+        padding: 1.2rem;
+      }
+
+      .shortcuts-tip p {
+        font-size: 0.95rem;
+        line-height: 1.5;
+      }
+
+      .shortcuts-demo {
+        padding: 1.2rem;
+        margin-top: 1.5rem;
+      }
+
+      .shortcuts-demo h3 {
+        font-size: 1.2rem;
+        margin-bottom: 0.8rem;
+      }
+
+      .shortcuts-demo p {
+        font-size: 0.95rem;
+        margin-bottom: 1rem;
+      }
+
+      .demo-highlight {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 1rem;
+      }
+
+      .demo-text {
+        font-size: 0.9rem;
+      }
+
+      .demo-highlight kbd {
+        padding: 0.3rem 0.5rem;
+        font-size: 0.75rem;
+        margin: 0 0.2rem;
+      }
+    }
+
     .container {
       max-width: 1200px;
       margin: 0 auto;
@@ -1813,6 +2179,7 @@
       </a>
       <nav id="nav">
         <a href="#features">Features</a>
+        <a href="#shortcuts">Shortcuts</a>
         <a href="#why">Why Mani<span style="color: #dc2626; font-weight: 600;">X</span>?</a>
         <a href="#testimonials">Testimonials</a>
         <a href="#contact">Contact</a>
@@ -1834,6 +2201,7 @@
   <div class="mobile-sidebar" id="mobileSidebar">
     <nav class="mobile-sidebar-nav">
       <a href="#features">Features</a>
+      <a href="#shortcuts">Shortcuts</a>
       <a href="#why">Why ManiX?</a>
       <a href="#testimonials">Testimonials</a>
       <a href="#contact">Contact</a>
@@ -1974,10 +2342,10 @@
         </div>
         <div class="feature-card reveal stagger-6">
           <h3>
-            <span class="feature-icon">⚡</span>
-            Custom Shortcuts
+            <span class="feature-icon">⌨️</span>
+            Keyboard Shortcuts
           </h3>
-          <p>Create and manage custom shortcuts to your favorite websites. Add, edit, and organize shortcuts for quick access.</p>
+          <p>Lightning-fast navigation with powerful keyboard shortcuts. Press 1-6 for sections, Ctrl+S for settings, / for search, and more for ultimate productivity.</p>
         </div>
         <div class="feature-card reveal stagger-7">
           <h3>
@@ -2006,6 +2374,98 @@
             Backup & Restore
           </h3>
           <p>Export and import all your settings, wallpapers, shortcuts, and todo items. Complete data portability and backup.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Keyboard Shortcuts Section -->
+  <section class="keyboard-shortcuts" id="shortcuts">
+    <div class="container">
+      <div class="section-header reveal">
+        <h2>⌨️ Keyboard Shortcuts</h2>
+        <p>Master ManiX with powerful keyboard shortcuts for lightning-fast navigation and productivity</p>
+      </div>
+      <div class="shortcuts-grid">
+        <div class="shortcuts-category reveal stagger-1">
+          <h3>Navigation</h3>
+          <div class="shortcut-list">
+            <div class="shortcut-item">
+              <kbd>1</kbd>
+              <span>Home</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>2</kbd>
+              <span>AI Tools</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>3</kbd>
+              <span>Todo</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>4</kbd>
+              <span>Bookmarks</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>5</kbd>
+              <span>Shortcuts</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>6</kbd>
+              <span>Apps</span>
+            </div>
+          </div>
+        </div>
+        <div class="shortcuts-category reveal stagger-2">
+          <h3>Quick Actions</h3>
+          <div class="shortcut-list">
+            <div class="shortcut-item">
+              <kbd>W</kbd>
+              <span>Open wallpapers</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>N</kbd>
+              <span>Open notifications</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>Ctrl</kbd><kbd>S</kbd>
+              <span>Open settings</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>Ctrl</kbd><kbd>R</kbd>
+              <span>Reload page</span>
+            </div>
+          </div>
+        </div>
+        <div class="shortcuts-category reveal stagger-3">
+          <h3>Focus & Control</h3>
+          <div class="shortcut-list">
+            <div class="shortcut-item">
+              <kbd>S</kbd>
+              <span>Focus search bar</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>Esc</kbd>
+              <span>Close modals/blur search</span>
+            </div>
+            <div class="shortcut-item">
+              <kbd>Shift</kbd><kbd>?</kbd>
+              <span>Show this help</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shortcuts-tip reveal stagger-4">
+        <div class="tip-icon">💡</div>
+        <p><strong>Pro Tip:</strong> Press <kbd>Shift</kbd> + <kbd>?</kbd> anytime in ManiX to see all available shortcuts!</p>
+      </div>
+      <div class="shortcuts-demo reveal stagger-5">
+        <h3>🚀 Try It Now!</h3>
+        <p>These shortcuts work immediately after installing ManiX. No setup required - just install and start boosting your productivity!</p>
+        <div class="demo-highlight">
+          <span class="demo-text">Most Popular:</span>
+          <kbd>S</kbd> <span>for instant search</span>
+          <kbd>Ctrl</kbd><kbd>S</kbd> <span>for quick settings</span>
         </div>
       </div>
     </div>
@@ -2195,8 +2655,27 @@
         dots[0].classList.add('active');
       }
 
-      // Start auto-rotation
-      startAutoRotate();
+      // Intersection Observer to start auto-rotation only when section is visible
+      const testimonialsSection = document.querySelector('.testimonials');
+      let isVisible = false;
+      
+      const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting && !isVisible) {
+            isVisible = true;
+            startAutoRotate();
+          } else if (!entry.isIntersecting && isVisible) {
+            isVisible = false;
+            clearInterval(testimonialInterval);
+          }
+        });
+      }, {
+        threshold: 0.3 // Start when 30% of the section is visible
+      });
+      
+      if (testimonialsSection) {
+        observer.observe(testimonialsSection);
+      }
 
       // Pause on hover
       const testimonialSection = document.querySelector('.testimonials-container');
@@ -2205,7 +2684,11 @@
           clearInterval(testimonialInterval);
         });
 
-        testimonialSection.addEventListener('mouseleave', startAutoRotate);
+        testimonialSection.addEventListener('mouseleave', () => {
+          if (isVisible) {
+            startAutoRotate();
+          }
+        });
       }
 
       // Dot navigation
@@ -2251,6 +2734,15 @@
           </div>
         </div>
         <div class="faq-item reveal stagger-4">
+          <div class="faq-question">
+            <span>What keyboard shortcuts are available?</span>
+            <span class="faq-icon">+</span>
+          </div>
+          <div class="faq-answer">
+            ManiX includes powerful keyboard shortcuts for productivity: Press 1-6 for navigation (Home, AI Tools, Todo, Bookmarks, Shortcuts, Apps), S for search, W for wallpapers, N for notifications, Ctrl+S for settings, Ctrl+R to reload, Esc to close modals, and Shift+? to show all shortcuts.
+          </div>
+        </div>
+        <div class="faq-item reveal stagger-5">
           <div class="faq-question">
             <span>How do I customize my shortcuts?</span>
             <span class="faq-icon">+</span>
@@ -2301,10 +2793,9 @@
             <span class="faq-icon">+</span>
           </div>
           <div class="faq-answer">
-            Click the gear icon (⚙️) in the top-right corner of your new tab page to open the settings sidebar. Here you can customize wallpapers, set your name, configure weather, adjust display preferences, and manage backups.
+            Look for the gear icon (⚙️) on your new tab page, usually located in the top-right corner or in the navigation area. Click it to open the comprehensive settings panel where you can customize all aspects of Manix.
           </div>
         </div>
-
         <div class="faq-item reveal stagger-10">
           <div class="faq-question">
             <span>How does the weather feature work?</span>
