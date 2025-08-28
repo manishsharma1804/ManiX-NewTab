@@ -13,12 +13,6 @@
             "alt": "Gemini"
         },
         {
-            "name": "Gemini Advanced",
-            "url": "https://gemini.google.com/app",
-            "icon": "https://www.google.com/s2/favicons?domain=gemini.google.com&sz=128",
-            "alt": "Gemini Advanced"
-        },
-        {
             "name": "Claude",
             "url": "https://claude.ai",
             "icon": "https://www.google.com/s2/favicons?domain=claude.ai&sz=128",
@@ -59,12 +53,6 @@
             "url": "https://chat.mistral.ai",
             "icon": "https://www.google.com/s2/favicons?domain=chat.mistral.ai&sz=128",
             "alt": "Mistral"
-        },
-        {
-            "name": "HuggingChat",
-            "url": "https://huggingface.co/chat",
-            "icon": "https://www.google.com/s2/favicons?domain=huggingface.co&sz=128",
-            "alt": "HuggingChat"
         }
     ],
     "googleApps": [
