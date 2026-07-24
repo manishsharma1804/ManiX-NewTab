@@ -15,5 +15,14 @@
       "date": "2025-08-00",
       "type": "info",
       "link": "mailto:contact@manishsharma18.in?subject=ManiX%20Feedback%20%26%20Issues"
+    },
+    {
+      "id": "3",
+      "title": "🔔 Meet Reminderly – Smart Reminder & Focus Assistant!",
+      "message": "Supercharge your browser productivity! Remi Assistant, Pomodoro Focus Mode, Distracting Site Blocker, and Wellness Micro-Breaks (Hydration, Eye Rest & Posture Checks). 100% Offline & Private. Get Reminderly on Chrome Web Store!",
+      "date": "2026-07-00",
+      "type": "warning",
+      "link": "https://chromewebstore.google.com/detail/reminderly-%E2%80%93-smart-remind/kfeoemhllihgkkingfaeiandihddbeaj"
     }
-  ]}
+  ]
+}
